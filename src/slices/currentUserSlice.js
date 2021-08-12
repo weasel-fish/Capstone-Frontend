@@ -13,6 +13,10 @@ export default function currentUserReducer(state = initialState, action) {
             return {...state, followees: [...state.followees, action.payload]}
         case 'currentUser/removeFollowee':
             return {...state, followees: state.followees.filter(fol => fol.id !== action.payload)}
+        case 'currentUser/addOuting':
+            return {...state, outings: [...state.outings, action.payload]}
+        case 'currentUser/removeOuting':
+            return {...state, outings: state.outings.filter(out => out.id !== action.payload)}
         default:
 
     }

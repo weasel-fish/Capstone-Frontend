@@ -8,23 +8,23 @@ function BugFans() {
     const [loading, setLoading] = useState(true)
     const dispatch = useDispatch()
 
-    useEffect(() => { //Instead of fetching every time on page load, maybe store it in Redux state?
-        if(users.length > 0) {
-            setLoading(false)
-        } else {
-            fetch('/users')
-            .then(resp => resp.json())
-            .then(users => {
-                dispatch({type: 'users/set', payload: users})
-                setLoading(false)
-            })
-        }
-    }, [])
+    // useEffect(() => { //Instead of fetching every time on page load, maybe store it in Redux state?
+    //     if(users.length > 0) {
+    //         setLoading(false)
+    //     } else {
+    //         fetch('/users')
+    //         .then(resp => resp.json())
+    //         .then(users => {
+    //             dispatch({type: 'users/set', payload: users})
+    //             setLoading(false)
+    //         })
+    //     }
+    // }, [])
 
     return (
         <>
             <h1>Bug Fans Like You!</h1>
-            {loading ? 'Loading...' : users.map(user => {
+            {!loading ? 'Loading...' : users.map(user => {
                 if(user.username !== currentUser.username) {
                     return <UserCard key={user.id} user={user} />
                 }

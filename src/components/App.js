@@ -10,11 +10,13 @@ import UserPage from './UserPage';
 import BugFans from './BugFans'
 import SightingStats from './SightingStats'
 import TrackedBugs from './TrackedBugs'
+import Outing from './Outing'
 
 function App() {
 
   const dispatch = useDispatch()
-  const animals = useSelector(state => state.animals)
+  // const animals = useSelector(state => state.animals)
+  // const users = useSelector(state => state.users)
   
   useEffect(() => {
     fetch('/me')
@@ -23,11 +25,14 @@ function App() {
         resp.json()
         .then(user => {
           dispatch({type: 'currentUser/set', payload: user})
-            fetch('/animals')
-            .then(resp => resp.json())
-            .then(animals => dispatch({type: 'animals/set', payload: animals}))
         })
       }
+      fetch('/frontload')
+        .then(resp => resp.json())
+        .then(data => {
+          dispatch({type: 'users/set', payload: data.users})
+          dispatch({type: 'animals/set', payload: data.animals})
+        })
     })
   }, [dispatch])
   // useEffect(() => {
@@ -70,6 +75,11 @@ function App() {
         <Route exact path='/user-page/:id'>
           <UserPage />
         </Route>
+        <Redirect from={`/x-outing-page/:id`} to={`/outing-page/:id`} />
+        <Route exact path='/outing-page/:id'>
+          <Outing />
+        </Route>
+
       </Switch>
       
     </div>
