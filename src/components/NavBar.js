@@ -14,11 +14,22 @@ function NavBar() {
         })
     }
 
+    function loggedInNavLinks() {
+        return (
+            <>
+                <NavLink to='/user-home'>Welcome, {currentUser.username}</NavLink>
+                <NavLink to='/bug-fans'>Bug Fans</NavLink>
+                <NavLink to='/sighting-state'>Sighting Stats</NavLink>
+                <NavLink to='/tracked-bugs'>Tracked Bugs</NavLink>
+                <button onClick={() => handleLogout()}>Logout</button>
+            </>
+        )
+    }
+
     return (
         <>
             <h1>BugNet</h1>
-            {currentUser ? <NavLink to='/user-home'>Welcome, {currentUser.username}</NavLink> : null}
-            {currentUser ? <button onClick={() => handleLogout()}>Logout</button> : <NavLink to='/login'>Login/Signup</NavLink>}
+            {currentUser ? loggedInNavLinks() : <NavLink to='/login'>Login/Signup</NavLink>}
         </>
     )
 }
