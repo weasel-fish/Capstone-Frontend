@@ -18,27 +18,29 @@ function LoginForm() {
         })
     }
 
-    function handleSubmit(e) { //NEED TO HANDLE ERRORS
+    async function handleSubmit(e) { //NEED TO HANDLE ERRORS
         e.preventDefault()
-        fetch('/login', {
+
+        let resp = await fetch('/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(formData)
         })
-        .then(resp => resp.json())
-        .then(user => {
-            if(user.ok){
+
+        if(resp.ok){
+            setError('')
+            resp.json().then(user => {
                 dispatch({type: 'currentUser/set', payload: user})
-                console.log('hello')
-                history.push('/home')
-            } else {
+                history.push('/user-home')
+            })
+        } else {
+            resp.json().then(user => {
                 setError(user.error)
                 setFormData({username: '', password: ''})
-            }
-            // dispatch(setCurrentUser(user)) DOES NOT WORK YET
-        })
+            })
+        }
     }
 
     return (

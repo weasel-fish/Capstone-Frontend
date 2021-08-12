@@ -23,25 +23,26 @@ function SignupForm() {
         })
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
 
-        fetch('/users', {
+        let resp = await fetch('/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(formData)
         })
-        .then(resp => resp.json())
-        .then(data => {
-            if(data.ok){
-                dispatch({type: 'currentUser/set', payload: data})
-                // history.push('/') // WHY ARE YOU NOT WORKING
-            } else {
-                setErrors(data.errors)
-            }
-        })
+
+        if(resp.ok) {
+            resp.json().then(user => {
+                setErrors([])
+                dispatch({type: 'currentUser/set', payload: user})
+                history.push('/user-home')
+            })
+        } else {
+            resp.json().then(user => setErrors(user.errors))
+        }
     }
 
     return (
@@ -58,7 +59,7 @@ function SignupForm() {
                 <input type='text' name='avatar' onChange={handleChange} value={formData.avatar}></input>
                 <input type='submit' value='Create Account'/>
             </form>
-            {errors ? errors.map(error => <li>{error}</li>) : null}
+            {errors ? errors.map(error => <li key={error}>{error}</li>) : null}
         </>
     )
 }
