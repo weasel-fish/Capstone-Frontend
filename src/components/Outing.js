@@ -1,24 +1,34 @@
 import {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import UserCard from './UserCard'
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+import SightingCard from './SightingCard'
+import AddSightingForm from './AddSightingForm'
 
 function Outing() {
     const [outing, setOuting] = useState({})
+    const [attendees, setAttendees] = useState([])
+    const [openInvites, setOpenInvites] = useState([])
+    const [sightings, setSightings] = useState([])
+
     const [loading, setLoading] = useState(true)
     const [attending, setAttending] = useState(false)
     const [message, setMessage] = useState('')
-    const [openInvites, setOpenInvites] = useState([])
+    const [sightingForm, setSightingForm] = useState(false)
+  
     const params = useParams()
     const currentUser = useSelector(state => state.currentUser)
     const users = useSelector(state => state.users)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         fetch(`/outings/${params.id}`)
         .then(resp => resp.json())
         .then(outing => {
             setOuting(outing)
+            setAttendees(outing.users)
             setOpenInvites(outing.outing_invites)
+            setSightings(outing.sightings)
             setLoading(false)
             if(outing.users.some(user => user.id === currentUser.id)) {
                 setAttending(true)
@@ -28,7 +38,7 @@ function Outing() {
 
     async function invite(e) {
         e.preventDefault()
-        console.log(e.target.invitee.value)
+
         let resp = await fetch('/outing_invites', {
             method: 'POST',
             headers: {
@@ -51,6 +61,17 @@ function Outing() {
         }
     }
 
+    async function leave() {
+        let resp = await fetch(`/leave/${currentUser.id}/${outing.id}`, {method: 'DELETE'})
+
+        if (resp.ok) {
+            setAttending(false)
+            dispatch({type: 'currentUser/removeOuting', payload: outing.id})
+            let newAttendees = attendees.filter(user => user.id !== currentUser.id)
+            setAttendees(newAttendees)
+        }
+    }
+
     function generateOutingInfo() {
         const inviteOthers = (
             <>
@@ -59,7 +80,7 @@ function Outing() {
                     <select onChange={() => setMessage('')} name='invitee' defaultValue='default'>
                         <option disabled value='default'>---</option>
                         {users.map(user => {
-                            if(!outing.users.some(attendee => attendee.id === user.id) && !openInvites.some(invite => invite.invitee_id === user.id)) {
+                            if(!attendees.some(attendee => attendee.id === user.id) && !openInvites.some(invite => invite.invitee_id === user.id)) {
                                 return <option key={user.id} value={user.id}>{user.username}</option>
                             }
                         })}
@@ -69,19 +90,26 @@ function Outing() {
                 {message ? <p>{message}</p> : null}
             </>
         )
+
         return (
             <>
                 <h2>{outing.name}</h2>
-                <p>{outing.date}</p>
-                <p>{outing.location}</p>
-                <p>{outing.description}</p>
-                <p>{outing.notes}</p>
+                <p>Where: {outing.location}</p>
+                <p>When: {outing.date}</p>
+                <p>Description: {outing.description}</p>
+                <p> Notes: {outing.notes}</p>
                 <h3>Attendees:</h3>
-                {outing.users.map(user => <UserCard key={user.id} user={user}/>)}
+                {attendees.map(user => <UserCard key={user.id} user={user}/>)}
                 {attending ? inviteOthers : null}
+                {attending ? <button onClick={() => leave()}>Leave Outing</button> : null}
+                <h3>Sightings!</h3>
+                {attending ? <button onClick={() => setSightingForm(!sightingForm)}>Add Sighting</button> : null}
+                {sightingForm ? <AddSightingForm outingID={outing.id} sightings={sightings} setSightings={setSightings} setSightingForm={setSightingForm}/> : null}
+                {sightings.map(sight => <SightingCard key={sight.id} sighting={sight} sightings={sightings} setSightings={setSightings}/>)}
             </>
         )
     }
+
     return (
         <>
             {loading ? <p>Loading...</p>: generateOutingInfo()}

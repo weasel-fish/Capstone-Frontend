@@ -43,7 +43,11 @@ function UserHome() {
         })
 
         if(resp.ok){
-            resp.json().then(invite => dispatch({type: 'currentUser/addOuting', payload: invite.outing}))
+            resp.json().then(attendance => {
+                dispatch({type: 'currentUser/addOuting', payload: attendance.outing})
+                let newInvites = invites.filter(inv => inv.id !== invite.id)
+                setInvites(newInvites)
+            })
         } else {
             resp.json().then(console.log)
         }
