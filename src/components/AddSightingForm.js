@@ -83,7 +83,7 @@ function AddSightingForm({outingID, sightings, setSightings, setSightingForm}) {
                 <label>Pick a tracked animal or generate new information</label>
                 <select onChange={handleDropChange} name='animal'>
                     <option value='generate'>Generate new</option>
-                    {animals.map(anim => <option value={anim.id}>{anim.common_name}</option>)}
+                    {animals.map(anim => <option key={anim.id} value={anim.id}>{anim.common_name}</option>)}
                 </select>
                 {dropdown === 'generate' ? <NewAnimalForm animForm={animForm} handleAnimChange={handleAnimChange}/> : null}
                 <label>Environment:</label>

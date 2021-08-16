@@ -17,6 +17,7 @@ function UserPage() {
     const dispatch = useDispatch()
     const self = currentUser.id === user.id
     const following = currentUser.followees.some(fol => fol.id === user.id)
+    const [followers, setFollowers] = useState([])
 
     
     useEffect(() => {
@@ -28,6 +29,7 @@ function UserPage() {
             .then(resp => resp.json())
             .then(user => {
                 setUser(user)
+                setFollowers(user.followers)
                 setLoading(false)
             })
         // }
@@ -47,7 +49,11 @@ function UserPage() {
         })
 
         if(resp.ok){
-            resp.json().then(() => dispatch({type: 'currentUser/addFollowee', payload: user}))
+            resp.json().then(() => {
+                dispatch({type: 'currentUser/addFollowee', payload: user})
+                let newFollowers = [...followers, currentUser]
+                setFollowers(newFollowers)
+            })
         } else {
            resp.json().then(console.log)
         }
@@ -57,7 +63,11 @@ function UserPage() {
         let resp = await fetch(`/follows/${currentUser.id}/${user.id}`, {method: 'DELETE'})
 
         if(resp.ok) {
-            resp.json().then(dispatch({type: 'currentUser/removeFollowee', payload: user.id}))
+            // resp.json().then(() => {
+                dispatch({type: 'currentUser/removeFollowee', payload: user.id})
+                let newFollowers = followers.filter(fol => fol.id !== currentUser.id)
+                setFollowers(newFollowers)
+            // })
         } else {
             resp.json().then(console.log)
         }
@@ -70,7 +80,7 @@ function UserPage() {
                 {self ? null : following ? <button onClick={() => handleUnfollow()}>Unfollow</button>:<button onClick={() => handleFollow()}>Follow</button>}
                 <WishList user={user} />
                 <OutingsList user={user} />
-                <FollowersList user={user} />
+                <FollowersList user={user} followers={followers} />
                 <FollowingList user={user} />
             </>
         )

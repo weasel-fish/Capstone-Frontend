@@ -19,7 +19,7 @@ function NavBar() {
             <>
                 <NavLink to='/user-home'>Welcome, {currentUser.username}</NavLink>
                 <NavLink to='/bug-fans'>Bug Fans</NavLink>
-                <NavLink to='/sighting-state'>Sighting Stats</NavLink>
+                <NavLink to='/sighting-stats'>Sighting Stats</NavLink>
                 <NavLink to='/tracked-bugs'>Tracked Bugs</NavLink>
                 <button onClick={() => handleLogout()}>Logout</button>
             </>

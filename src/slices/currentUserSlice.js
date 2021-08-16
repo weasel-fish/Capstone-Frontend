@@ -17,6 +17,12 @@ export default function currentUserReducer(state = initialState, action) {
             return {...state, outings: [...state.outings, action.payload]}
         case 'currentUser/removeOuting':
             return {...state, outings: state.outings.filter(out => out.id !== action.payload)}
+        case 'currentUser/addWish':
+            return {...state, wishes: [...state.wishes, action.payload]}
+        case 'currentUser/removeWish':
+            return {...state, wishes: state.wishes.filter(wish => wish.id !== action.payload)}
+        case 'currentUser/removeAlert':
+            return {...state, alerts: state.alerts.filter(alert => alert.id !== action.payload)}
         default:
 
     }

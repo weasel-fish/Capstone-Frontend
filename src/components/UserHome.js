@@ -5,11 +5,14 @@ import OutingsList from './OutingsList'
 import FollowingList from './FollowingList'
 import FollowersList from './FollowersList'
 import Invitation from './Invitation'
+import Alert from './Alert'
 
 function UserHome() {
     const [showInvites, setShowInvites] = useState(false)
+    const [showAlerts, setShowAlerts] = useState(false)
     const [invites, setInvites] = useState([])
     const currentUser = useSelector(state => state.currentUser)
+    const [alerts, setAlerts] = useState(currentUser.alerts)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -24,6 +27,12 @@ function UserHome() {
             return <>{invites.map(invite => <Invitation key={invite.id} invite={invite} acceptInvite={acceptInvite} rejectInvite={rejectInvite}/>)}</>
         } else {
             return <p>You have no invites!</p>
+        }
+    }
+
+    function renderAlerts() {
+        if(alerts.length > 0) {
+            return <>{alerts.map(alert => <Alert key={alert.id} alert={alert} alerts={alerts} setAlerts={setAlerts} setShowAlerts={setShowAlerts}/>)}</>
         }
     }
 
@@ -66,14 +75,19 @@ function UserHome() {
 
     return (
         <>
-            <h1>{currentUser.username}'s Home</h1>
+            {/* <h1>{currentUser.username}'s Home</h1> */}
+            <h1>Your Home Page</h1>
             <div>
                 <button onClick={() => setShowInvites(!showInvites)}> {showInvites ? 'Hide Invites' : `Show Invites (${invites.length})`}</button>
                 {showInvites ? renderInvites() : null}
             </div>
+            <div>
+                <button onClick={() => setShowAlerts(!showAlerts)}> {showAlerts ? 'Hide Alerts' : `Show Alerts (${alerts.length})`}</button>
+                {showAlerts ? renderAlerts() : null}
+            </div>
             <WishList user={currentUser} />
             <OutingsList user={currentUser} />
-            <FollowersList user={currentUser} />
+            <FollowersList user={currentUser} followers={currentUser.followers}/>
             <FollowingList user={currentUser} />
         </>
     )
