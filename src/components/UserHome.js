@@ -74,7 +74,7 @@ function UserHome() {
             console.log('something went wrong')
         }
     }
-    console.log(currentUser)
+
     return (
         <>
             {/* <h1>{currentUser.username}'s Home</h1> */}

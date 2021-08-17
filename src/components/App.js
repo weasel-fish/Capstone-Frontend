@@ -19,6 +19,7 @@ function App() {
   // const users = useSelector(state => state.users)
   
   useEffect(() => {
+    console.log('Fetched frontload')
     fetch('/me')
     .then(resp => {
       if(resp.status === 200) {

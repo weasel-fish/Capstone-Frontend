@@ -7,7 +7,7 @@ function NavBar() {
     const history = useHistory()
 
     function handleLogout(){
-        fetch('logout', {method: 'DELETE'})
+        fetch('/logout', {method: 'DELETE'})
         .then(() => {
             history.push('/')
             dispatch({type: 'currentUser/set', payload: ''})

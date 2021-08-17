@@ -32,28 +32,49 @@ function SignupForm() {
         }
         
     }
-    console.log(formData)
 
     async function handleSubmit(e) {
         e.preventDefault()
-
-        let resp = await fetch('/users', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: formData.username,
-                password: formData.password,
-                address: formData.address
+        if(!formData.avatar) {
+            let resp = await fetch('/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: formData.username,
+                    password: formData.password,
+                    address: formData.address,
+                    no_avatar: true
+                })
             })
-        })
-
-        if(resp.ok) {
-            resp.json().then(user => handleUpload(formData.avatar, user)
-            )
+            if(resp.ok){
+                resp.json().then(user => {
+                    dispatch({type: 'currentUser/set', payload: user})
+                    dispatch({type: 'users/add', payload: {id: user.id, username: user.username}})
+                    history.push('/user-home')
+                })
+            }
+                
         } else {
-            resp.json().then(user => setErrors(user.errors))
+            let resp = await fetch('/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: formData.username,
+                    password: formData.password,
+                    address: formData.address
+                })
+            })
+
+            if(resp.ok) {
+                resp.json().then(user => handleUpload(formData.avatar, user)
+                )
+            } else {
+                resp.json().then(user => setErrors(user.errors))
+            }
         }
     }
 
@@ -61,7 +82,7 @@ function SignupForm() {
         const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
         upload.create((error, blob) => {
             if(error) {
-                console.log(error)
+                setErrors([error])
             } else {
                 fetch(`/users/${user.id}`, {
                     method: 'PUT',
@@ -73,8 +94,8 @@ function SignupForm() {
                 })
                 .then(resp => resp.json())
                 .then(user => {
-                    setErrors([])
                     dispatch({type: 'currentUser/set', payload: user})
+                    dispatch({type: 'users/add', payload: {id: user.id, username: user.username}})
                     history.push('/user-home')
                 })
             }
@@ -91,7 +112,7 @@ function SignupForm() {
                 <input type='password' name='password' onChange={handleChange} value={formData.password}></input>
                 <label>Email:</label>
                 <input type='text' name='address' onChange={handleChange} value={formData.address}></input>
-                <label>Avatar (image url):</label>
+                <label>Avatar:</label>
                 <input type='file' name='avatar' onChange={handleChange} ></input>
                 <input type='submit' value='Create Account'/>
             </form>
