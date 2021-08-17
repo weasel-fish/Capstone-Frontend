@@ -18,7 +18,7 @@ function WishList({user}) {
     return (
         <>
             <h3>{home ? 'Your Wishlist: ': `${user.username}'s Wishlist:`}</h3>
-            {wishes.length > 0 ? wishes.map(wish => <Wish key={wish.id} wish={wish}/>) : <li>Wishlist Empty</li>}
+            {wishes.length > 0 ? wishes.map(wish => <Wish key={wish.id} wish={wish} home={home}/>) : <li>Wishlist Empty</li>}
             {home ? 
             <>
                 <button onClick={() => setDisplayForm(!displayForm)}>{displayForm ? 'Cancel' : 'Add a Bug to your Wishlist'}</button>

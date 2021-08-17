@@ -22,7 +22,8 @@ function SightingCard({sighting, sightings, setSightings}) {
 
     return (
         <div>
-            <h5 onClick={() => setExpand(!expand)}>{sighting.animal.common_name}</h5>
+            <h5 onClick={() => setExpand(!expand)}>{sighting.animal}</h5>
+            {/* .common_name */}
             {expand ? showDetails() : null}
         </div>
     )

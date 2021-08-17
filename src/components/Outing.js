@@ -35,7 +35,7 @@ function Outing() {
             }
         })
     }, [])
-
+    console.log(outing)
     async function invite(e) {
         e.preventDefault()
 

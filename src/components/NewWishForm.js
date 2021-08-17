@@ -27,8 +27,9 @@ function NewWishForm({setDisplayForm}) {
             })
 
             if(resp.ok) {
-                resp.json().then(wish => {
-                    dispatch({type: 'currentUser/addWish', payload: wish})
+                resp.json().then(data => {
+                    dispatch({type: 'currentUser/addWish', payload: data.wish})
+                    dispatch({type: 'animals/add', payload: data.animal})
                     setDisplayForm(false)
                 })
             } else {
@@ -72,7 +73,7 @@ function NewWishForm({setDisplayForm}) {
                 <label>Pick a tracked animal or generate new information</label>
                 <select onChange={handleDropChange} name='animal'>
                     <option value='generate'>Generate new</option>
-                    {animals.map(anim => <option value={anim.id}>{anim.common_name}</option>)}
+                    {animals.map(anim => <option key={anim.id} value={anim.id}>{anim.common_name}</option>)}
                 </select>
                 {dropdown === 'generate' ? <NewAnimalForm animForm={formData} handleAnimChange={handleChange}/> : null}
                 <input type='submit'></input>

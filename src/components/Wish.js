@@ -1,7 +1,7 @@
 import {useDispatch} from 'react-redux'
 import BugCard from './BugCard'
 
-function Wish({wish}) {
+function Wish({wish, home}) {
     const dispatch = useDispatch()
 
     async function handleClick(){
@@ -16,7 +16,7 @@ function Wish({wish}) {
     return (
         <>
             <BugCard bug={wish.animal}/>
-            <button onClick={() => handleClick()}>Remove from Wishlist</button>
+            {home ? <button onClick={() => handleClick()}>Remove from Wishlist</button> : null}
         </>
     )
 }

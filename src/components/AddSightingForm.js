@@ -1,4 +1,4 @@
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import {useState} from 'react'
 import NewAnimalForm from './NewAnimalForm'
 
@@ -8,6 +8,7 @@ function AddSightingForm({outingID, sightings, setSightings, setSightingForm}) {
     const [formData, setFormData] = useState({environment: '', weather_conditions: '', notes: ''})
     const [animForm, setAnimForm] = useState({common_name: '', scientific_name: '', description: ''})
     const [errors, setErrors] = useState([])
+    const dispatch = useDispatch()
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -22,10 +23,17 @@ function AddSightingForm({outingID, sightings, setSightings, setSightingForm}) {
             })
 
             if(resp.ok) {
-                resp.json().then(sight => {
-                    let newSightings = [...sightings, sight]
+                resp.json().then(data => {
+                    console.log(data.animal)
+                    console.log(data.sighting)
+                    dispatch({type: 'animals/add', payload: data.animal})
+                    let newSightings = [...sightings, data.sighting]
                     setSightings(newSightings)
                     setSightingForm(false)
+                // resp.json().then(sight => {
+                //     let newSightings = [...sightings, sight]
+                //     setSightings(newSightings)
+                //     setSightingForm(false)
                 })
             } else {
                 resp.json().then(data => {
