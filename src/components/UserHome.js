@@ -33,6 +33,8 @@ function UserHome() {
     function renderAlerts() {
         if(alerts.length > 0) {
             return <>{alerts.map(alert => <Alert key={alert.id} alert={alert} alerts={alerts} setAlerts={setAlerts} setShowAlerts={setShowAlerts}/>)}</>
+        } else {
+            return <p>You have no alerts!</p>
         }
     }
 
@@ -72,11 +74,12 @@ function UserHome() {
             console.log('something went wrong')
         }
     }
-
+    console.log(currentUser)
     return (
         <>
             {/* <h1>{currentUser.username}'s Home</h1> */}
             <h1>Your Home Page</h1>
+            <img src={`http://localhost:3000${currentUser.avatar}`} />
             <div>
                 <button onClick={() => setShowInvites(!showInvites)}> {showInvites ? 'Hide Invites' : `Show Invites (${invites.length})`}</button>
                 {showInvites ? renderInvites() : null}

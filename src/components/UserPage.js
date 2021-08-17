@@ -77,6 +77,7 @@ function UserPage() {
         return (
             <>
                 <h1>{user.username}'s Page</h1>
+                <img src={`http://localhost:3000${user.avatar}`} />
                 {self ? null : following ? <button onClick={() => handleUnfollow()}>Unfollow</button>:<button onClick={() => handleFollow()}>Follow</button>}
                 <WishList user={user} />
                 <OutingsList user={user} />

@@ -18,6 +18,7 @@ function UserCard({user}) {
 
     return (
         <>
+            {/* <img src={`http://localhost:3000${user.avatar}`} /> */}
             <li onClick={() => handleUserClick()}>{user.username}</li>
         </>
     )

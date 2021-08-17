@@ -103,7 +103,7 @@ function Outing() {
                 {attending ? inviteOthers : null}
                 {attending ? <button onClick={() => leave()}>Leave Outing</button> : null}
                 <h3>Sightings!</h3>
-                {attending ? <button onClick={() => setSightingForm(!sightingForm)}>Add Sighting</button> : null}
+                {attending ? <button onClick={() => setSightingForm(!sightingForm)}>{sightingForm? 'Nevermind' : 'Add Sighting'}</button> : null}
                 {sightingForm ? <AddSightingForm outingID={outing.id} sightings={sightings} setSightings={setSightings} setSightingForm={setSightingForm}/> : null}
                 {sightings.map(sight => <SightingCard key={sight.id} sighting={sight} sightings={sightings} setSightings={setSightings}/>)}
             </>
