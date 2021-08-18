@@ -36,7 +36,7 @@ function SignupForm() {
     async function handleSubmit(e) {
         e.preventDefault()
         if(!formData.avatar) {
-            let resp = await fetch('/users', {
+            let resp = await fetch('/users', { //DEFAULT AVATAR CONDITION
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -57,7 +57,7 @@ function SignupForm() {
             }
                 
         } else {
-            let resp = await fetch('/users', {
+            let resp = await fetch('/users', { //CUSTOM AVATAR
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
