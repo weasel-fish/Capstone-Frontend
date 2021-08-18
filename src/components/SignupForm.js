@@ -70,8 +70,10 @@ function SignupForm() {
             })
 
             if(resp.ok) {
-                resp.json().then(user => handleUpload(formData.avatar, user)
-                )
+                resp.json().then(user => {
+                    console.log(user)
+                    handleUpload(formData.avatar, user)
+                })
             } else {
                 resp.json().then(user => setErrors(user.errors))
             }

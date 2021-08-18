@@ -10,7 +10,8 @@ function SightingCard({sighting, sightings, setSightings}) {
             <>
                 {edit ? <EditSightingForm sighting={sighting} sightings={sightings} setSightings={setSightings} setEdit={setEdit}/>
                 :
-                <>
+                <>  
+                    <img src={`http://localhost:3000${sighting.image}`}/>
                     <p>Environment: {sighting.environment}</p>
                     <p>Weather Conditions: {sighting.weather_conditions}</p>
                     <p>Notes: {sighting.notes}</p>
