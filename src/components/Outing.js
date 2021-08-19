@@ -4,6 +4,7 @@ import UserCard from './UserCard'
 import {useSelector, useDispatch} from 'react-redux'
 import SightingCard from './SightingCard'
 import AddSightingForm from './AddSightingForm'
+import EditOutingForm from './EditOutingForm'
 
 function Outing() {
     const [outing, setOuting] = useState({})
@@ -15,6 +16,7 @@ function Outing() {
     const [attending, setAttending] = useState(false)
     const [message, setMessage] = useState('')
     const [sightingForm, setSightingForm] = useState(false)
+    const [edit, setEdit] = useState(false)
   
     const params = useParams()
     const history = useHistory()
@@ -36,7 +38,7 @@ function Outing() {
             }
         })
     }, [])
-    console.log(outing)
+
     async function invite(e) {
         e.preventDefault()
 
@@ -104,11 +106,15 @@ function Outing() {
         return (
             <>
                 <h2>{outing.name}</h2>
-                <img src={`http://localhost:3000${outing.image}`}/>
-                <p>Where: {outing.location}</p>
-                <p>When: {outing.date}</p>
-                <p>Description: {outing.description}</p>
-                <p> Notes: {outing.notes}</p>
+                <img src={`http://localhost:3000${outing.image}`} alt='outing pic'/>
+                <button onClick={() => setEdit(!edit)}>{edit ? 'Nevermind' : 'Edit Outing Info'}</button>
+                {edit ? <EditOutingForm outing={outing} setOuting={setOuting} setEdit={setEdit}/> :
+                <>
+                    <p>Where: {outing.location}</p>
+                    <p>When: {outing.date}</p>
+                    <p>Description: {outing.description}</p>
+                    <p> Notes: {outing.notes}</p>
+                </>}
                 <h3>Attendees:</h3>
                 {attendees.map(user => <UserCard key={user.id} user={user}/>)}
                 {attending ? inviteOthers : null}

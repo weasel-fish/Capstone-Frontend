@@ -1,10 +1,8 @@
 import {useSelector} from 'react-redux'
-import {useState} from 'react'
 import BugCard from './BugCard'
 
 function TrackedBugs() {
     const animals = useSelector(state => state.animals)
-    const [loading, setLoading] = useState(true)
 
     return (
         <>

@@ -3,7 +3,7 @@ import LoginSignupPage from './LoginSignupPage'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import NavBar from './NavBar';
 import { useEffect } from 'react';
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import SplashPage from './SplashPage'
 import UserHome from './UserHome';
 import UserPage from './UserPage';

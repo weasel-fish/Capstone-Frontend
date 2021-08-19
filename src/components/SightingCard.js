@@ -12,7 +12,7 @@ function SightingCard({sighting, sightings, setSightings}) {
                 {edit ? <EditSightingForm sighting={sighting} sightings={sightings} setSightings={setSightings} setEdit={setEdit}/>
                 :
                 <>  
-                    <img src={`http://localhost:3000${sighting.image}`}/>
+                    <img src={`http://localhost:3000${sighting.image}`} alt='bug pic'/>
                     <button onClick={() => setExpandFurther(!expandFurther)}> {expandFurther ? 'Hide Details' : 'Show Details'} </button>
                     {expandFurther ? <>
                         <p><em>{sighting.animal.scientific_name}</em></p>

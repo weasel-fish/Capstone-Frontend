@@ -79,7 +79,7 @@ function UserHome() {
         <>
             {/* <h1>{currentUser.username}'s Home</h1> */}
             <h1>Your Home Page</h1>
-            <img src={`http://localhost:3000${currentUser.avatar}`} />
+            <img src={`http://localhost:3000${currentUser.avatar}`} alt='user pic'/>
             <div>
                 <button onClick={() => setShowInvites(!showInvites)}> {showInvites ? 'Hide Invites' : `Show Invites (${invites.length})`}</button>
                 {showInvites ? renderInvites() : null}

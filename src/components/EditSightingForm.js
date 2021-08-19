@@ -49,7 +49,7 @@ function EditSightingForm({sighting, sightings, setSightings, setEdit}) {
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <img src={`http://localhost:3000${sighting.image}`}/>
+                <img src={`http://localhost:3000${sighting.image}`} alt='bug pic'/>
                 <label>Environment:</label>
                 <input type='text' name='environment' onChange={handleChange} value={formData.environment}></input>
                 <label>Weather Conditions:</label>

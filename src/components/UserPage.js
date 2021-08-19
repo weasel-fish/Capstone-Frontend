@@ -5,7 +5,7 @@ import OutingsList from './OutingsList'
 import FollowingList from './FollowingList'
 import FollowersList from './FollowersList'
 import { useEffect } from 'react'
-import {useParams, useHistory} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 
 function UserPage() {
     const [loading, setLoading] = useState(true)
@@ -13,7 +13,6 @@ function UserPage() {
     
     const currentUser = useSelector(state => state.currentUser)
     const params = useParams()
-    const history = useHistory()
     const dispatch = useDispatch()
     const self = currentUser.id === user.id
     const following = currentUser.followees.some(fol => fol.id === user.id)
@@ -77,7 +76,7 @@ function UserPage() {
         return (
             <>
                 <h1>{user.username}'s Page</h1>
-                <img src={`http://localhost:3000${user.avatar}`} />
+                <img src={`http://localhost:3000${user.avatar}`} alt='user pic'/>
                 {self ? null : following ? <button onClick={() => handleUnfollow()}>Unfollow</button>:<button onClick={() => handleFollow()}>Follow</button>}
                 <WishList user={user} />
                 <OutingsList user={user} />

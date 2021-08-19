@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import BugCard from './BugCard'
+import TopBugCard from './TopBugCard'
 
 function SightingStats() {
     const [loading, setLoading] = useState(true)
@@ -16,12 +16,15 @@ function SightingStats() {
         })
     }, [])
 
+    console.log(topWish)
+    console.log(topSight)
+
     return (
         <>
             <h3>Most Wished for Bugs:</h3>
-            {loading ? <p>Loading...</p> : topWish.map(bug => <BugCard key={bug.id} bug={bug}/>)}
+            {loading ? <p>Loading...</p> : topWish.map(bug => <TopBugCard key={bug.animal.id} bug={bug.animal} val={bug.val} type={'wishes'}/>)}
             <h3>Most Sighted Bugs:</h3>
-            {loading ? <p>Loading...</p>: topSight.map(bug => <BugCard key={bug.id} bug={bug}/>)}
+            {loading ? <p>Loading...</p>: topSight.map(bug => <TopBugCard key={bug.animal.id} bug={bug.animal} val={bug.val} type={bug.val > 1 ? 'sightings' : 'sighting'}/>)}
         </>
     )
 }
