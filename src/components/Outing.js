@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams, useHistory} from 'react-router-dom'
 import UserCard from './UserCard'
 import {useSelector, useDispatch} from 'react-redux'
 import SightingCard from './SightingCard'
@@ -17,6 +17,7 @@ function Outing() {
     const [sightingForm, setSightingForm] = useState(false)
   
     const params = useParams()
+    const history = useHistory()
     const currentUser = useSelector(state => state.currentUser)
     const users = useSelector(state => state.users)
     const dispatch = useDispatch()
@@ -72,6 +73,15 @@ function Outing() {
         }
     }
 
+    function deleteOuting() {
+        fetch(`/outings/${outing.id}`, {method: 'DELETE'})
+        .then(() => {
+            dispatch({type: 'currentUser/removeOuting', payload: outing.id})
+            history.push('/user-home')
+        })
+
+    }
+
     function generateOutingInfo() {
         const inviteOthers = (
             <>
@@ -102,7 +112,7 @@ function Outing() {
                 <h3>Attendees:</h3>
                 {attendees.map(user => <UserCard key={user.id} user={user}/>)}
                 {attending ? inviteOthers : null}
-                {attending ? attendees.length === 1 ? <button>Delete Outing</button>: <button onClick={() => leave()}>Leave Outing</button> : null}
+                {attending ? attendees.length === 1 ? <button onClick={() => deleteOuting()}>Delete Outing</button>: <button onClick={() => leave()}>Leave Outing</button> : null}
                 <h3>Sightings!</h3>
                 {attending ? <button onClick={() => setSightingForm(!sightingForm)}>{sightingForm? 'Nevermind' : 'Add Sighting'}</button> : null}
                 {sightingForm ? <AddSightingForm outingID={outing.id} sightings={sightings} setSightings={setSightings} setSightingForm={setSightingForm}/> : null}
