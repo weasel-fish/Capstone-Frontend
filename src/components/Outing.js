@@ -94,6 +94,7 @@ function Outing() {
         return (
             <>
                 <h2>{outing.name}</h2>
+                <img src={`http://localhost:3000${outing.image}`}/>
                 <p>Where: {outing.location}</p>
                 <p>When: {outing.date}</p>
                 <p>Description: {outing.description}</p>
