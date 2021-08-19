@@ -16,24 +16,59 @@ function AddSightingForm({outingID, sightings, setSightings, setSightingForm}) {
         setErrors([])
         //New animal
         if(dropdown === 'generate') {
-            let resp = await fetch('/sightings/with-new', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({...animForm, ...formData, outing_id: outingID})
-            })
-
-            if(resp.ok) {
-                resp.json().then(data => {
-                    dispatch({type: 'animals/add', payload: data.animal})
-                    let newSightings = [...sightings, data.sighting]
-                    setSightings(newSightings)
-                    setSightingForm(false)
+            if(!formData.image) {
+                let resp = await fetch('/sightings/with-new', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        ...animForm,
+                        // ...formData,
+                        environment: formData.environment,
+                        notes: formData.notes,
+                        weather_conditions: formData.weather_conditions,
+                        outing_id: outingID,
+                        no_image: true
+                    })
                 })
+
+                if(resp.ok) {
+                    resp.json().then(data => {
+                        dispatch({type: 'animals/add', payload: data.animal})
+                        let newSightings = [...sightings, data.sighting]
+                        setSightings(newSightings)
+                        setSightingForm(false)
+                    })
+                } else {
+                    resp.json().then(data => {
+                        setErrors(data.errors)})
+                }
             } else {
-                resp.json().then(data => {
-                    setErrors(data.errors)})
+                let resp = await fetch('/sightings/with-new', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        ...animForm,
+                        // ...formData,
+                        environment: formData.environment,
+                        notes: formData.notes,
+                        weather_conditions: formData.weather_conditions,
+                        outing_id: outingID
+                    })
+                })
+
+                if(resp.ok) {
+                    resp.json().then(data => {
+                        dispatch({type: 'animals/add', payload: data.animal})
+                        handleUpload(formData.image, data.sighting)
+                    })
+                } else {
+                    resp.json().then(data => setErrors(data.errors))
+                }
+
             }
             //Existing animal
         } else {
@@ -53,12 +88,18 @@ function AddSightingForm({outingID, sightings, setSightings, setSightingForm}) {
                         no_image: true
                     })
                 })
-                .then(resp => resp.json())
-                .then(sight => {
-                    let newSightings = [...sightings, sight]
-                    setSightings(newSightings)
-                    setSightingForm(false)
-                })
+
+                if(resp.ok) {
+                    resp.json()
+                    .then(sight => {
+                        let newSightings = [...sightings, sight]
+                        setSightings(newSightings)
+                        setSightingForm(false)
+                    })
+                } else {
+                    resp.json().then(data => setErrors(data.errors))
+                }
+
             } else {
                 let resp = await fetch('/sightings', {
                     method: 'POST',

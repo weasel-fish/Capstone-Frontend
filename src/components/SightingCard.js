@@ -3,6 +3,7 @@ import EditSightingForm from './EditSightingForm'
 
 function SightingCard({sighting, sightings, setSightings}) {
     const [expand, setExpand] = useState(false)
+    const [expandFurther, setExpandFurther] = useState(false)
     const [edit, setEdit] = useState(false)
 
     function showDetails() {
@@ -12,6 +13,11 @@ function SightingCard({sighting, sightings, setSightings}) {
                 :
                 <>  
                     <img src={`http://localhost:3000${sighting.image}`}/>
+                    <button onClick={() => setExpandFurther(!expandFurther)}> {expandFurther ? 'Hide Details' : 'Show Details'} </button>
+                    {expandFurther ? <>
+                        <p><em>{sighting.animal.scientific_name}</em></p>
+                        <p>{sighting.animal.description}</p>
+                    </> : null}
                     <p>Environment: {sighting.environment}</p>
                     <p>Weather Conditions: {sighting.weather_conditions}</p>
                     <p>Notes: {sighting.notes}</p>
@@ -23,7 +29,7 @@ function SightingCard({sighting, sightings, setSightings}) {
 
     return (
         <div>
-            <h5 onClick={() => setExpand(!expand)}>{sighting.animal}</h5>
+            <h5 onClick={() => setExpand(!expand)}>{sighting.animal.common_name}</h5>
             {/* .common_name */}
             {expand ? showDetails() : null}
         </div>
