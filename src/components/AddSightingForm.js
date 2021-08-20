@@ -175,7 +175,6 @@ function AddSightingForm({outingID, sightings, setSightings, setSightingForm}) {
             })
         }
     }
-    console.log(formData)
     return (
         <>
             <h5>Add a Sighting</h5>
@@ -194,7 +193,7 @@ function AddSightingForm({outingID, sightings, setSightings, setSightingForm}) {
                 <input type='text' name='weather_conditions' onChange={handleChange} value={formData.weather_conditions}></input>
                 <label>Notes:</label>
                 <input type='text' name='notes' onChange={handleChange} value={formData.notes}></input>
-                {errors.length > 0 ? errors.map(error => <li>{error}</li>) : null}
+                {errors.length > 0 ? errors.map(error => <li key={error}>{error}</li>) : null}
                 <input type='submit' />
             </form>
         </>

@@ -11,6 +11,14 @@ import BugFans from './BugFans'
 import SightingStats from './SightingStats'
 import TrackedBugs from './TrackedBugs'
 import Outing from './Outing'
+import styled, { createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: rgba(186, 235, 161, 92);
+    /* color: rgba(158, 77, 156, 62) */
+  }
+`
 
 function App() {
 
@@ -52,6 +60,7 @@ function App() {
 
   return (
     <div>
+      <GlobalStyle />
       <NavBar />
       <Switch>
          <Route exact path='/'>

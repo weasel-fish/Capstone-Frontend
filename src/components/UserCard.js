@@ -1,5 +1,17 @@
 import {useHistory} from 'react-router-dom'
 import {useSelector} from 'react-redux'
+import styled from 'styled-components'
+
+const StyledCard = styled.div`
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 4px;
+    text-align: center;
+    width: 120px;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+`
 
 function UserCard({user}) {
 
@@ -17,10 +29,10 @@ function UserCard({user}) {
 
 
     return (
-        <>
+        <StyledCard>
             {/* <img src={`http://localhost:3000${user.avatar}`} /> */}
-            <li onClick={() => handleUserClick()}>{user.username}</li>
-        </>
+            <div onClick={() => handleUserClick()}>{user.username}</div>
+        </StyledCard>
     )
 }
 

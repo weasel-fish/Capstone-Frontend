@@ -6,6 +6,68 @@ import FollowingList from './FollowingList'
 import FollowersList from './FollowersList'
 import Invitation from './Invitation'
 import Alert from './Alert'
+import styled from 'styled-components'
+
+const Head = styled.div`
+    text-align: center;
+    margin-bottom: 20px;
+`
+
+const StyledAlerts = styled.div`
+    grid-area: 1 / 1 / 2 / 2;
+    & button {
+            /* margin: 40px; */
+            padding: 6px;
+            font-size: 18px;
+            font-weight: 500;
+            background-color: #8C69B8;
+            border: none;
+            border-radius: 3px;
+            color: rgba(186, 235, 161, 92);
+            cursor: pointer;
+        }
+`
+const StyledInvites = styled.div`
+    grid-area: 1 / 2 / 2 / 3;
+    & button {
+            /* margin: 40px; */
+            padding: 6px;
+            font-size: 18px;
+            font-weight: 500;
+            background-color: #8C69B8;
+            border: none;
+            border-radius: 3px;
+            color: rgba(186, 235, 161, 92);
+            cursor: pointer;
+        }
+`
+
+
+const GridParent = styled.div`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 15px;
+    justify-items: center;
+    /* align-items: center; */
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+`
+
+const StyledWishList = styled.div`
+   grid-area: 2 / 1 / 5 / 2;
+`
+const StyledOutings = styled.div`
+    grid-area: 2 / 2 / 3 / 3;
+`
+const StyledFollowers = styled.div`
+    grid-area: 3 / 2 / 4 / 3;
+`
+const StyledFollowees = styled.div`
+    grid-area: 4 / 2 / 5 / 3;
+`
 
 function UserHome() {
     const [showInvites, setShowInvites] = useState(false)
@@ -77,21 +139,33 @@ function UserHome() {
 
     return (
         <>
-            {/* <h1>{currentUser.username}'s Home</h1> */}
-            <h1>Your Home Page</h1>
-            <img src={`http://localhost:3000${currentUser.avatar}`} alt='user pic'/>
-            <div>
-                <button onClick={() => setShowInvites(!showInvites)}> {showInvites ? 'Hide Invites' : `Show Invites (${invites.length})`}</button>
-                {showInvites ? renderInvites() : null}
-            </div>
-            <div>
-                <button onClick={() => setShowAlerts(!showAlerts)}> {showAlerts ? 'Hide Alerts' : `Show Alerts (${alerts.length})`}</button>
-                {showAlerts ? renderAlerts() : null}
-            </div>
-            <WishList user={currentUser} />
-            <OutingsList user={currentUser} />
-            <FollowersList user={currentUser} followers={currentUser.followers}/>
-            <FollowingList user={currentUser} />
+            <Head>
+                <h1>Your Home Page</h1>
+                <img src={`http://localhost:3000${currentUser.avatar}`} alt='user pic'/>
+                <p>{currentUser.username}</p>
+            </Head>
+            <GridParent>
+                <StyledAlerts>
+                    <button onClick={() => setShowAlerts(!showAlerts)}> {showAlerts ? 'Hide Alerts' : `Show Alerts (${alerts.length})`}</button>
+                    {showAlerts ? renderAlerts() : null}
+                </StyledAlerts>
+                <StyledWishList>
+                    <WishList user={currentUser} />
+                </StyledWishList>
+                <StyledInvites>
+                    <button onClick={() => setShowInvites(!showInvites)}> {showInvites ? 'Hide Invites' : `Show Invites (${invites.length})`}</button>
+                    {showInvites ? renderInvites() : null}
+                </StyledInvites>
+                <StyledOutings>
+                    <OutingsList user={currentUser} />
+                </StyledOutings>
+                <StyledFollowers>
+                    <FollowersList user={currentUser} followers={currentUser.followers}/>
+                </StyledFollowers>
+                <StyledFollowees>
+                    <FollowingList user={currentUser} />
+                </StyledFollowees>
+            </GridParent>
         </>
     )
 }

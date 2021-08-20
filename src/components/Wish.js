@@ -1,5 +1,16 @@
 import {useDispatch} from 'react-redux'
 import BugCard from './BugCard'
+import styled from 'styled-components'
+
+const StyledRemove = styled.button`
+    padding: 6px;
+        font-size: 18px;
+        font-weight: 500;
+        background-color: #8C69B8;
+        border: none;
+        border-radius: 3px;
+        color: rgba(186, 235, 161, 92);
+`
 
 function Wish({wish, home}) {
     const dispatch = useDispatch()
@@ -16,7 +27,7 @@ function Wish({wish, home}) {
     return (
         <>
             <BugCard bug={wish.animal}/>
-            {home ? <button onClick={() => handleClick()}>Remove from Wishlist</button> : null}
+            {home ? <StyledRemove onClick={() => handleClick()}>Remove from Wishlist</StyledRemove> : null}
         </>
     )
 }
