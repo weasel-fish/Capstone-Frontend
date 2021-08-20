@@ -3,10 +3,14 @@ import UserCard from "./UserCard"
 import styled from 'styled-components'
 
 const BugFansContainer = styled.div`
+    display: flex;
+    flex-direction: column;
     text-align: center;
+    margin: 20px auto 20px auto;
 `
 const BugFanList = styled.div`
     text-align: center;
+    margin: auto;
 `
 
 function BugFans() {

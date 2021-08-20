@@ -11,6 +11,7 @@ import BugFans from './BugFans'
 import SightingStats from './SightingStats'
 import TrackedBugs from './TrackedBugs'
 import Outing from './Outing'
+import Footer from './Footer';
 import styled, { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
@@ -89,9 +90,8 @@ function App() {
         <Route exact path='/outing-page/:id'>
           <Outing />
         </Route>
-
       </Switch>
-      
+      <Footer />
     </div>
   );
 }

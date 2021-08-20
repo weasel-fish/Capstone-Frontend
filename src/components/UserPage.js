@@ -8,22 +8,27 @@ import { useEffect } from 'react'
 import {useParams} from 'react-router-dom'
 import styled from 'styled-components'
 
-const GrandFlex = styled.div`
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 50px;
+
+const GridParent = styled.div`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 15px;
+    justify-items: center;
+    width: 70%;
+    margin: 30px auto 30px auto;
 `
-const ParentFlex = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+const LeftColumn = styled.div`
+    grid-area: 1 / 1 / 2 / 2;
 `
+const RightColumn = styled.div`
+    grid-area: 1 / 2 / 2 / 3;
+`
+
 const Head = styled.div`
     text-align: center;
     margin-bottom: 50px;
-`
-const FlexChild = styled.div`
-    margin: 20px;
 `
 
 const Button = styled.button`
@@ -111,7 +116,17 @@ function UserPage() {
                     <br></br>
                     {self ? null : following ? <Button onClick={() => handleUnfollow()}>Unfollow</Button>:<Button onClick={() => handleFollow()}>Follow</Button>}
                 </Head>
-                <GrandFlex>
+                <GridParent>
+                    <LeftColumn>
+                        <WishList user={user} />
+                    </LeftColumn>
+                    <RightColumn>
+                        <OutingsList user={user} />
+                        <FollowersList user={user} followers={followers} />
+                        <FollowingList user={user} />
+                    </RightColumn>
+                </GridParent>
+                {/* <GrandFlex>
                     <WishList user={user} />
                     <ParentFlex>
                         <FlexChild>
@@ -124,7 +139,7 @@ function UserPage() {
                         <FollowingList user={user} />
                         </FlexChild>
                     </ParentFlex>
-                </GrandFlex>
+                </GrandFlex> */}
             </>
         )
     }

@@ -15,6 +15,7 @@ const Head = styled.div`
 
 const StyledAlerts = styled.div`
     grid-area: 1 / 1 / 2 / 2;
+    text-align: center;
     & button {
             /* margin: 40px; */
             padding: 6px;
@@ -25,10 +26,12 @@ const StyledAlerts = styled.div`
             border-radius: 3px;
             color: rgba(186, 235, 161, 92);
             cursor: pointer;
+            margin: 5px 0px 5px 0px;
         }
 `
 const StyledInvites = styled.div`
     grid-area: 1 / 2 / 2 / 3;
+    text-align: center;
     & button {
             /* margin: 40px; */
             padding: 6px;
@@ -39,6 +42,7 @@ const StyledInvites = styled.div`
             border-radius: 3px;
             color: rgba(186, 235, 161, 92);
             cursor: pointer;
+            margin: 5px 5px 5px 5px;
         }
 `
 
@@ -46,27 +50,28 @@ const StyledInvites = styled.div`
 const GridParent = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-rows: 1fr;
     grid-column-gap: 10px;
     grid-row-gap: 15px;
     justify-items: center;
-    /* align-items: center; */
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+    width: 70%;
+    margin: 30px auto 30px auto;
+`
+const LeftColumn = styled.div`
+    grid-area: 1 / 1 / 2 / 2;
+`
+const RightColumn = styled.div`
+    grid-area: 1 / 2 / 2 / 3;
 `
 
-const StyledWishList = styled.div`
-   grid-area: 2 / 1 / 5 / 2;
-`
-const StyledOutings = styled.div`
-    grid-area: 2 / 2 / 3 / 3;
-`
-const StyledFollowers = styled.div`
-    grid-area: 3 / 2 / 4 / 3;
-`
-const StyledFollowees = styled.div`
-    grid-area: 4 / 2 / 5 / 3;
+const NoNews = styled.p`
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 4px;
+    text-align: center;
+    width: 120px;
+    padding: 5px;
+    margin: 5px;
 `
 
 function UserHome() {
@@ -88,7 +93,7 @@ function UserHome() {
         if(invites.length > 0) {
             return <>{invites.map(invite => <Invitation key={invite.id} invite={invite} acceptInvite={acceptInvite} rejectInvite={rejectInvite}/>)}</>
         } else {
-            return <p>You have no invites!</p>
+            return <NoNews>You have no invites!</NoNews>
         }
     }
 
@@ -96,7 +101,7 @@ function UserHome() {
         if(alerts.length > 0) {
             return <>{alerts.map(alert => <Alert key={alert.id} alert={alert} alerts={alerts} setAlerts={setAlerts} setShowAlerts={setShowAlerts}/>)}</>
         } else {
-            return <p>You have no alerts!</p>
+            return <NoNews>You have no alerts!</NoNews>
         }
     }
 
@@ -149,22 +154,20 @@ function UserHome() {
                     <button onClick={() => setShowAlerts(!showAlerts)}> {showAlerts ? 'Hide Alerts' : `Show Alerts (${alerts.length})`}</button>
                     {showAlerts ? renderAlerts() : null}
                 </StyledAlerts>
-                <StyledWishList>
-                    <WishList user={currentUser} />
-                </StyledWishList>
                 <StyledInvites>
                     <button onClick={() => setShowInvites(!showInvites)}> {showInvites ? 'Hide Invites' : `Show Invites (${invites.length})`}</button>
                     {showInvites ? renderInvites() : null}
                 </StyledInvites>
-                <StyledOutings>
+            </GridParent>
+            <GridParent>
+                <LeftColumn>
+                    <WishList user={currentUser} />
+                </LeftColumn>
+                <RightColumn>
                     <OutingsList user={currentUser} />
-                </StyledOutings>
-                <StyledFollowers>
                     <FollowersList user={currentUser} followers={currentUser.followers}/>
-                </StyledFollowers>
-                <StyledFollowees>
                     <FollowingList user={currentUser} />
-                </StyledFollowees>
+                </RightColumn>
             </GridParent>
         </>
     )

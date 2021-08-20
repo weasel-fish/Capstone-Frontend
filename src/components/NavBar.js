@@ -10,16 +10,19 @@ const NavContainer = styled.div`
     align-items: center;
     background-color: #8C69B8;
 `
-const Logo = styled.h1`
+const Logo = styled(NavLink)`
     color: rgba(186, 235, 161, 92);
     margin: 40px;
-    margin-right: 60px;
+    margin-right: 50px;
+    text-decoration: none;
+    font-size: 35px;
+    font-weight: 600;
 `
 
 const NavButton = styled(NavLink)`
     display: block;
     font-size: 18px;
-    height: 22px;
+    height: 25px;
     background-color: rgba(186, 235, 161, 92);
     color: #A42BF5;
     /* border: 2px solid black; */
@@ -57,6 +60,7 @@ const LogOut = styled.button`
     margin: 10px;
     padding: 5px 8px 2px 8px;
     margin-left: auto;
+    margin-right: 30px;
     border: none;
 
     &:hover {
@@ -95,7 +99,7 @@ function NavBar() {
 
     return (
         <NavContainer>
-            <Logo>BugNet</Logo>
+            <Logo to='/'>BugNet</Logo>
             {currentUser ? loggedInNavLinks() : <LogIn to='/login'>Login/Signup</LogIn>}
         </NavContainer>
     )

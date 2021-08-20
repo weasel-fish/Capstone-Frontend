@@ -12,6 +12,17 @@ const FolloweesContainer = styled.div`
     border-radius: 8px;
     padding: 10px;
     width: 100%;
+    margin-top: 20px;
+    margin-bottom: 40px;
+`
+const NoFollowees = styled.p`
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 4px;
+    text-align: center;
+    width: 120px;
+    padding: 5px;
+    margin: 5px;
 `
 
 function FollowingList({user}) {
@@ -21,7 +32,7 @@ function FollowingList({user}) {
     return (
         <FolloweesContainer>
             <h3>{home ? 'You are following: ': `${user.username} is following:`}</h3>
-            {user.followees.length > 0 ? user.followees.map(fol => <UserCard key={fol.id} user={fol}/>) : home ? `You aren't following anyone` : `${user.username} isn't following anyone`}
+            {user.followees.length > 0 ? user.followees.map(fol => <UserCard key={fol.id} user={fol}/>) : <NoFollowees>{home ? `You aren't following anyone` : `${user.username} isn't following anyone`}</NoFollowees>}
         </FolloweesContainer>
     )
 }

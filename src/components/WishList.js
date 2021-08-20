@@ -25,6 +25,17 @@ const FormButton = styled.button`
         border-radius: 3px;
         color: rgba(186, 235, 161, 92);
         margin-top: 20px;
+        cursor: pointer;
+`
+
+const NoWishes = styled.p`
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 4px;
+    text-align: center;
+    width: 120px;
+    padding: 5px;
+    margin: 5px;
 `
 
 function WishList({user}) {
@@ -42,10 +53,10 @@ function WishList({user}) {
     return (
         <WishContainer>
             <h3>{home ? 'Your Wishlist: ': `${user.username}'s Wishlist:`}</h3>
-            {wishes.length > 0 ? wishes.map(wish => <Wish key={wish.id} wish={wish} home={home}/>) : <li>Wishlist Empty</li>}
+            {wishes.length > 0 ? wishes.map(wish => <Wish key={wish.id} wish={wish} home={home}/>) : <NoWishes>Wishlist Empty</NoWishes>}
             {home ? 
             <>
-                <FormButton onClick={() => setDisplayForm(!displayForm)}>{displayForm ? 'Cancel' : 'Add a Bug to your Wishlist'}</FormButton>
+                <FormButton onClick={() => setDisplayForm(!displayForm)}>{displayForm ? 'Nevermind' : 'Add a Bug to your Wishlist'}</FormButton>
                 {displayForm ? <NewWishForm setDisplayForm={setDisplayForm}/> : null} 
             </>
             : null }

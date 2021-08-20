@@ -12,6 +12,16 @@ const FollowersContainer = styled.div`
     border-radius: 8px;
     padding: 10px;
     width: 100%;
+    margin-top: 20px;
+`
+const NoFollowers = styled.p`
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 4px;
+    text-align: center;
+    width: 120px;
+    padding: 5px;
+    margin: 5px;
 `
 
 function FollowersList({user, followers}) {
@@ -21,7 +31,7 @@ function FollowersList({user, followers}) {
     return (
         <FollowersContainer>
             <h3>{home ? 'Your followers: ': `${user.username}'s followers:`}</h3>
-            {followers.length > 0 ? followers.map(fol => <UserCard key={fol.id} user={fol}/>) : home ? `You don't have any followers` : `${user.username} doesn't have any followers`}
+            {followers.length > 0 ? followers.map(fol => <UserCard key={fol.id} user={fol}/>) : <NoFollowers> {home ? `You don't have any followers`: `${user.username} doesn't have any followers`}</NoFollowers>}
         </FollowersContainer>
     )
 }
