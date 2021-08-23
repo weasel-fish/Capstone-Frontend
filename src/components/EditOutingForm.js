@@ -1,4 +1,26 @@
 import {useState} from 'react'
+import styled from 'styled-components'
+
+const StyledForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-around;
+    
+    height: 250px;
+
+    & input[type=submit] {
+        align-self: flex-start;
+        padding: 6px;
+        font-size: 18px;
+        font-weight: 500;
+        background-color: #8C69B8;
+        border: none;
+        border-radius: 3px;
+        color: rgba(186, 235, 161, 92);
+        cursor: pointer;
+    }
+`
 
 function EditOutingForm({outing, setOuting, setEdit}) {
     const [formData, setFormData] = useState({name: outing.name, location: outing.location, date: outing.date, description: outing.description, notes: outing.notes})
@@ -35,20 +57,20 @@ function EditOutingForm({outing, setOuting, setEdit}) {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <label>Name:</label>
-                <input type='text' name='name' onChange={handleChange} value={formData.name}></input>
-                <label>Where:</label>
-                <input type='text' name='location' onChange={handleChange} value={formData.location}></input>
-                <label>When:</label>
-                <input type='date' name='date' onChange={handleChange} value={formData.date}></input>
-                <label>Description:</label>
-                <input type='text' name='description' onChange={handleChange} value={formData.description}></input>
-                <label>Notes:</label>
-                <input type='text' name='notes' onChange={handleChange} value={formData.notes}></input>
+            <StyledForm onSubmit={handleSubmit}>
+                <label>Name: <input type='text' name='name' onChange={handleChange} value={formData.name}></input></label>
+                
+                <label>Where: <input type='text' name='location' onChange={handleChange} value={formData.location}></input></label>
+                
+                <label>When: <input type='date' name='date' onChange={handleChange} value={formData.date}></input></label>
+                
+                <label>Description: <input type='text' name='description' onChange={handleChange} value={formData.description}></input></label>
+                
+                <label>Notes: <input type='text' name='notes' onChange={handleChange} value={formData.notes}></input></label>
+                
                 <input type='submit' />
                 {errors ? errors.map(error => <li key={error}>{error}</li>):null}
-            </form>
+            </StyledForm>
         </>
     )
 }

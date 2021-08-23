@@ -1,11 +1,63 @@
 import {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {DirectUpload} from 'activestorage'
+import {useHistory} from 'react-router'
+import styled from 'styled-components'
+
+
+const Container = styled.div`
+    margin: auto;
+    width: 500px;
+    text-align: center;
+`
+const Error = styled.p`
+    color: red;
+    font-weight: 700;
+`
+
+const StyledForm = styled.form`
+    display: flex;
+    border: 2px solid black;
+    border-radius: 8px;
+    background-color: white;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    padding: 20px;
+    margin-top: 40px;
+    height: 400px;
+
+    & input[type=submit] {
+        /* align-self: center; */
+        padding: 6px;
+        font-size: 18px;
+        font-weight: 500;
+        background-color: #8C69B8;
+        border: none;
+        border-radius: 3px;
+        color: rgba(186, 235, 161, 92);
+        cursor: pointer;
+        margin: 5px 0px 5px 0px;
+    }
+`
+const Button = styled.button`
+    align-self: center;
+    padding: 6px;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #8C69B8;
+    border: none;
+    border-radius: 3px;
+    color: rgba(186, 235, 161, 92);
+    cursor: pointer;
+    margin: 5px 0px 50px 0px;
+`
 
 function CreateOutingForm({setDisplayForm}) {
     const [formData, setFormData] = useState({name:'', location: '', description: '', notes: ''})
     const [errors, setErrors] = useState([])
     const dispatch = useDispatch()
+    const history = useHistory()
     
     function handleChange(e) {
 
@@ -81,22 +133,6 @@ function CreateOutingForm({setDisplayForm}) {
             }
         }
 
-        // let resp = await fetch('/outings', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({...formData})
-        // })
-
-        // if(resp.ok){
-        //     resp.json().then(outing => {
-        //         dispatch({type: 'currentUser/addOuting', payload: outing})
-        //         setDisplayForm(false)
-        //     })
-        // } else {
-        //     resp.json().then(data => setErrors(data.errors))
-        // }
     }
 
     function handleUpload(file, outing) {
@@ -116,31 +152,26 @@ function CreateOutingForm({setDisplayForm}) {
                 .then(resp => resp.json())
                 .then(outing => {
                     dispatch({type: 'currentUser/addOuting', payload: outing})
-                    setDisplayForm(false)
+                    history.push('/user-home')
                 })
             }
         })
     }
 
     return (
-        <>
-            <form onSubmit={handleSubmit}>
-                <label>Name:</label>
-                <input type='text' name='name' onChange={handleChange} value={formData.name}></input>
-                <label>Where:</label>
-                <input type='text' name='location' onChange={handleChange} value={formData.location}></input>
-                <label>When:</label>
-                <input type='date' name='date' onChange={handleChange} value={formData.date}></input>
-                <label>Description:</label>
-                <input type='text' name='description' onChange={handleChange} value={formData.description}></input>
-                <label>Notes:</label>
-                <input type='text' name='notes' onChange={handleChange} value={formData.notes}></input>
-                <label>Image:</label>
-                <input type='file' name='image' onChange={handleChange} ></input>
+        <Container>
+            <StyledForm onSubmit={handleSubmit}>
+                <label>Name: <input type='text' name='name' onChange={handleChange} value={formData.name}></input></label>
+                <label>Where: <input type='text' name='location' onChange={handleChange} value={formData.location}></input></label>
+                <label>When: <input type='date' name='date' onChange={handleChange} value={formData.date}></input></label>
+                <label>Description: <input type='text' name='description' onChange={handleChange} value={formData.description}></input></label>
+                <label>Notes: <input type='text' name='notes' onChange={handleChange} value={formData.notes}></input></label>
+                <label>Image: <input type='file' name='image' onChange={handleChange} ></input></label>
                 <input type='submit' />
-                {errors ? errors.map(error => <li key={error}>{error}</li>):null}
-            </form>
-        </>
+                {errors ? errors.map(error => <Error key={error}>{error}</Error>):null}
+            </StyledForm>
+            <Button onClick={() => history.push('/user-home')}>Cancel</Button>
+        </Container>
     )
 }
 

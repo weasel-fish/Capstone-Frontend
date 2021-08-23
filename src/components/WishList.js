@@ -13,6 +13,7 @@ const WishContainer = styled.div`
     border: 3px solid black;
     border-radius: 8px;
     padding: 10px;
+    /* margin: 40px; */
     /* width: 100%; */
 `
 

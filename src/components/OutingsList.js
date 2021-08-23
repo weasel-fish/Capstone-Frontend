@@ -3,6 +3,7 @@ import OutingCard from './OutingCard'
 import CreateOutingForm from './CreateOutingForm'
 import {useState} from 'react'
 import styled from 'styled-components'
+import { useHistory } from 'react-router'
 
 const OutingContainer = styled.div`
     display: flex;
@@ -40,12 +41,18 @@ function OutingsList({user}) {
     const currentUser = useSelector(state => state.currentUser)
     const home = currentUser.username === user.username
     const [displayForm, setDisplayForm] = useState(false)
+    const history = useHistory()
+
+    function handleCreate() {
+        history.push('/create-outing')
+    }
     
     return (
         <OutingContainer>
             <h3>{home ? 'Your Outings: ': `${user.username}'s Outings:`}</h3>
             {user.outings.length > 0 ? user.outings.map(out => <OutingCard key={out.id} outing={out} />) : home ? <NoOuting>You don't have any outings</NoOuting>: <NoOuting>{user.username} doesn't have any outings</NoOuting>}
-            {home ? <FormButton onClick={() => setDisplayForm(!displayForm)}>{displayForm ? 'Nevermind' : 'Create a New Outing'}</FormButton> : null}
+            {home ? <FormButton onClick={() => handleCreate()}>{displayForm ? 'Nevermind' : 'Create a New Outing'}</FormButton> : null}
+            {/* {home ? <FormButton onClick={() => setDisplayForm(!displayForm)}>{displayForm ? 'Nevermind' : 'Create a New Outing'}</FormButton> : null} */}
             {displayForm ? <CreateOutingForm setDisplayForm={setDisplayForm}/> : null}
         </OutingContainer>
     )

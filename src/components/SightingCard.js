@@ -1,5 +1,20 @@
 import {useState} from 'react'
 import EditSightingForm from './EditSightingForm'
+import styled from 'styled-components'
+
+const StyledCard = styled.div`
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 4px;
+    text-align: center;
+    width: 200px;
+    padding: 5px;
+    margin: 5px;
+`
+
+const Name = styled.h5`
+    cursor: pointer;
+`
 
 function SightingCard({sighting, sightings, setSightings}) {
     const [expand, setExpand] = useState(false)
@@ -13,6 +28,7 @@ function SightingCard({sighting, sightings, setSightings}) {
                 :
                 <>  
                     <img src={`http://localhost:3000${sighting.image}`} alt='bug pic'/>
+                    <br></br>
                     <button onClick={() => setExpandFurther(!expandFurther)}> {expandFurther ? 'Hide Details' : 'Show Details'} </button>
                     {expandFurther ? <>
                         <p><em>{sighting.animal.scientific_name}</em></p>
@@ -28,11 +44,11 @@ function SightingCard({sighting, sightings, setSightings}) {
     }
 
     return (
-        <div>
-            <h5 onClick={() => setExpand(!expand)}>{sighting.animal.common_name}</h5>
+        <StyledCard >
+            <Name onClick={() => setExpand(!expand)}>{sighting.animal.common_name}</Name>
             {/* .common_name */}
             {expand ? showDetails() : null}
-        </div>
+        </StyledCard>
     )
 }
 

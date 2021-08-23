@@ -7,6 +7,12 @@ import AddSightingForm from './AddSightingForm'
 import EditOutingForm from './EditOutingForm'
 import styled from 'styled-components'
 
+
+const Img = styled.img`
+    border: 3px solid black;
+    border-radius: 40px;
+`
+
 const GridContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -27,13 +33,38 @@ const StyledPic = styled.div`
 
 const StyledInfo = styled.div`
     grid-area: 1 / 3 / 3 / 6;
-    margin: auto;
+    margin: auto 100px 10px 20px;
+    border: 3px solid black;
+    border-radius: 8px;
+    background-color: white;
+    padding: 30px;
+`
+
+const Button = styled.button`
+    padding: 6px;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #8C69B8;
+    border: none;
+    border-radius: 3px;
+    color: rgba(186, 235, 161, 92);
+    cursor: pointer;
+    margin: 5px 0px 5px 0px;
 `
 
 const StyledSightings = styled.div`
     grid-area: 3 / 3 / 6 / 5;
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid black;
+    border-radius: 8px;
+    background-color: white;
+    width: 300px;
+    margin: 60px auto auto 50px;
+    padding-bottom: 20px;
 `
+
 const StyledAttendees = styled.div`
     grid-area: 3 / 1 / 6 / 3;
     margin: 60px auto 0px auto;
@@ -133,7 +164,7 @@ function Outing() {
                             }
                         })}
                     </select>
-                    <input type='submit' value='Send Invite'/>
+                    <Button as='input' type='submit' value='Send Invite'/>
                 </form>
                 {message ? <p>{message}</p> : null}
             </StyledInviteOthers>
@@ -144,7 +175,7 @@ function Outing() {
                 <StyledPic>
                     <h1>{outing.name}</h1>
                     <br></br>
-                    <img src={`http://localhost:3000${outing.image}`} alt='outing pic'/>
+                    <Img src={`http://localhost:3000${outing.image}`} alt='outing pic'/>
                 </StyledPic>
                 <StyledInfo>
                     {edit ? <EditOutingForm outing={outing} setOuting={setOuting} setEdit={setEdit}/> :
@@ -154,17 +185,17 @@ function Outing() {
                         <p>Description: {outing.description}</p>
                         <p> Notes: {outing.notes}</p>
                     </>}
-<button onClick={() => setEdit(!edit)}>{edit ? 'Nevermind' : 'Edit Outing Info'}</button>
+                    <Button onClick={() => setEdit(!edit)}>{edit ? 'Nevermind' : 'Edit Outing Info'}</Button>
                 </StyledInfo>
                 <StyledAttendees>
                     <h3>Attendees:</h3>
                     {attendees.map(user => <UserCard key={user.id} user={user}/>)}
                     {attending ? inviteOthers : null}
-                    {attending ? attendees.length === 1 ? <button onClick={() => deleteOuting()}>Delete Outing</button>: <button onClick={() => leave()}>Leave Outing</button> : null}
+                    {attending ? attendees.length === 1 ? <Button onClick={() => deleteOuting()}>Delete Outing</Button>: <Button onClick={() => leave()}>Leave Outing</Button> : null}
                 </StyledAttendees>
                 <StyledSightings>
                     <h3>Sightings!</h3>
-                    {attending ? <button onClick={() => setSightingForm(!sightingForm)}>{sightingForm? 'Nevermind' : 'Add Sighting'}</button> : null}
+                    {attending ? <Button onClick={() => setSightingForm(!sightingForm)}>{sightingForm? 'Nevermind' : 'Add Sighting'}</Button> : null}
                     {sightingForm ? <AddSightingForm outingID={outing.id} sightings={sightings} setSightings={setSightings} setSightingForm={setSightingForm}/> : null}
                     {sightings.map(sight => <SightingCard key={sight.id} sighting={sight} sightings={sightings} setSightings={setSightings}/>)}
                 </StyledSightings>

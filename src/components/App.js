@@ -14,6 +14,7 @@ import Outing from './Outing'
 import Footer from './Footer';
 import EditUserForm from './EditUserForm'
 import styled, { createGlobalStyle } from 'styled-components';
+import CreateOutingForm from './CreateOutingForm';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -85,6 +86,9 @@ function App() {
         </Route>
         <Route exact path='/edit-user'>
           <EditUserForm />
+        </Route>
+        <Route exact path='/create-outing'>
+          <CreateOutingForm />
         </Route>
         <Redirect from={`/x-user-page/:id`} to={`/user-page/:id`} />
         <Route exact path='/user-page/:id'>

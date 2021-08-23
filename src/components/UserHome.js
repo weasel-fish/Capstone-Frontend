@@ -47,6 +47,17 @@ const StyledInvites = styled.div`
         }
 `
 
+const Button = styled.button`
+    padding: 6px;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #8C69B8;
+    border: none;
+    border-radius: 3px;
+    color: rgba(186, 235, 161, 92);
+    cursor: pointer;
+    margin: 5px 0px 5px 0px;
+`
 
 const GridParent = styled.div`
     display: grid;
@@ -56,7 +67,7 @@ const GridParent = styled.div`
     grid-row-gap: 15px;
     justify-items: center;
     width: 70%;
-    margin: 30px auto 30px auto;
+    margin: 30px auto 50px auto;
 `
 const LeftColumn = styled.div`
     grid-area: 1 / 1 / 2 / 2;
@@ -73,6 +84,10 @@ const NoNews = styled.p`
     width: 120px;
     padding: 5px;
     margin: 5px;
+`
+const Img = styled.img`
+    border: 10px solid black;
+    border-radius: 100%;
 `
 
 function UserHome() {
@@ -152,9 +167,9 @@ function UserHome() {
         <>
             <Head>
                 <h1>Your Home Page</h1>
-                <img src={`http://localhost:3000${currentUser.avatar}`} alt='user pic'/>
+                <Img src={`http://localhost:3000${currentUser.avatar}`} alt='user pic'/>
                 <p>{currentUser.username}</p>
-                <button onClick={() => handleEdit()}>Edit Info</button>
+                <Button onClick={() => handleEdit()}>Edit Info</Button>
             </Head>
             <GridParent>
                 <StyledAlerts>

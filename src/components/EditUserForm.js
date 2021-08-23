@@ -2,6 +2,58 @@ import {useState} from 'react'
 import {useHistory} from 'react-router'
 import {useDispatch, useSelector} from 'react-redux'
 import {DirectUpload} from 'activestorage'
+import styled from 'styled-components'
+
+
+const Button = styled.button`
+    align-self: center;
+    padding: 6px;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #8C69B8;
+    border: none;
+    border-radius: 3px;
+    color: rgba(186, 235, 161, 92);
+    cursor: pointer;
+    margin: 5px 0px 50px 0px;
+`
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    border: 2px solid black;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    height: 450px;
+    margin: 40px auto;
+    background-color: white;
+`
+
+const StyledForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin: 30px auto 30px auto;
+    padding: 5px;
+    
+    height: 40px;
+
+    & input[type=submit] {
+        align-self: center;
+        padding: 6px;
+        font-size: 18px;
+        font-weight: 500;
+        background-color: #8C69B8;
+        border: none;
+        border-radius: 3px;
+        color: rgba(186, 235, 161, 92);
+        cursor: pointer;
+        margin: 15px 0px 0px 0px;
+    }
+`
 
 function EditUserForm() {
 
@@ -72,18 +124,18 @@ function EditUserForm() {
 
     
     return (
-        <>
-            <form onSubmit={handleEmailUpdate}>
+        <Container>
+            <StyledForm onSubmit={handleEmailUpdate}>
                 <label>Change Your Email: <input type='text' name='address' onChange={(e) => setEmail(e.target.value)} value={email}></input></label>
                 <input type='submit' value='Save'/>
-            </form>
-            <form onSubmit={handleAvatarUpdate}>
+            </StyledForm>
+            <StyledForm onSubmit={handleAvatarUpdate}>
                 <label>Upload New Avatar: <input type='file' name='avatar' onChange={(e) => setNewAvatar(e.target.files[0])} ></input></label>
                 <input type='submit' value='Upload'/>
-            </form>
-            <button onClick={() => handleDelete()}>Delete Account</button>
-            <button onClick={() => handleCancel()}>Cancel</button>
-        </>
+            </StyledForm>
+            <Button onClick={() => handleDelete()}>Delete Account</Button>
+            <Button onClick={() => handleCancel()}>Cancel Changes</Button>
+        </Container>
     )
 }
 

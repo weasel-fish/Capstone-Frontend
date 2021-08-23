@@ -2,6 +2,40 @@ import {useSelector, useDispatch} from 'react-redux'
 import {useState} from 'react'
 import {DirectUpload} from 'activestorage'
 import NewAnimalForm from './NewAnimalForm'
+import styled from 'styled-components'
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    border-radius: 8px;
+    width: 90%;
+`
+const StyledForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    /* align-items: stretch; */
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 90%;
+    /* height: 00px; */
+
+    & input[type=select] {
+    }
+
+    & input[type=submit] {
+        align-self: center;
+        padding: 6px;
+        font-size: 18px;
+        font-weight: 500;
+        background-color: #8C69B8;
+        border: none;
+        border-radius: 3px;
+        color: rgba(186, 235, 161, 92);
+        cursor: pointer;
+        margin: 5px 0px 5px 0px;
+    }
+`
 
 function AddSightingForm({outingID, sightings, setSightings, setSightingForm}) {
     const [dropdown, setDropdown] = useState('generate')
@@ -176,9 +210,9 @@ function AddSightingForm({outingID, sightings, setSightings, setSightingForm}) {
         }
     }
     return (
-        <>
+        <Container>
             <h5>Add a Sighting</h5>
-            <form onSubmit={handleSubmit}>
+            <StyledForm onSubmit={handleSubmit}>
                 <label>Pick a tracked animal or generate new information</label>
                 <select onChange={handleDropChange} name='animal'>
                     <option value='generate'>Generate new</option>
@@ -195,8 +229,8 @@ function AddSightingForm({outingID, sightings, setSightings, setSightingForm}) {
                 <input type='text' name='notes' onChange={handleChange} value={formData.notes}></input>
                 {errors.length > 0 ? errors.map(error => <li key={error}>{error}</li>) : null}
                 <input type='submit' />
-            </form>
-        </>
+            </StyledForm>
+        </Container>
     )
 }
 
