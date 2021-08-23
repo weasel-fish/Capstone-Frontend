@@ -2,6 +2,37 @@ import {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {useHistory} from 'react-router-dom'
 import {DirectUpload} from 'activestorage'
+import styled from 'styled-components'
+
+const StyledSignup = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 60px auto 0px auto;
+`
+
+
+const StyledForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-around;
+    
+    height: 250px;
+
+    & input[type=submit] {
+        align-self: center;
+        padding: 6px;
+        font-size: 18px;
+        font-weight: 500;
+        background-color: #8C69B8;
+        border: none;
+        border-radius: 3px;
+        color: rgba(186, 235, 161, 92);
+        cursor: pointer;
+        margin: 5px 0px 5px 0px;
+    }
+`
 
 function SignupForm() {
 
@@ -105,21 +136,17 @@ function SignupForm() {
     }
 
     return (
-        <>
+        <StyledSignup>
             <h3>Sign Up:</h3>
-            <form onSubmit={handleSubmit}>
-                <label>Username:</label>
-                <input type='text' name='username' onChange={handleChange} value={formData.username}></input>
-                <label>Password:</label>
-                <input type='password' name='password' onChange={handleChange} value={formData.password}></input>
-                <label>Email:</label>
-                <input type='text' name='address' onChange={handleChange} value={formData.address}></input>
-                <label>Avatar:</label>
-                <input type='file' name='avatar' onChange={handleChange} ></input>
+            <StyledForm onSubmit={handleSubmit}>
+                <label>Username: <input type='text' name='username' onChange={handleChange} value={formData.username}></input></label>
+                <label>Password: <input type='password' name='password' onChange={handleChange} value={formData.password}></input></label>
+                <label>Email: <input type='text' name='address' onChange={handleChange} value={formData.address}></input></label>
+                <label>Avatar: <input type='file' name='avatar' onChange={handleChange} ></input></label>
                 <input type='submit' value='Create Account'/>
-            </form>
+            </StyledForm>
             {errors ? errors.map(error => <li key={error}>{error}</li>) : null}
-        </>
+        </StyledSignup>
     )
 }
 

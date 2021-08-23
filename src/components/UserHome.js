@@ -7,6 +7,7 @@ import FollowersList from './FollowersList'
 import Invitation from './Invitation'
 import Alert from './Alert'
 import styled from 'styled-components'
+import { useHistory } from 'react-router'
 
 const Head = styled.div`
     text-align: center;
@@ -42,7 +43,7 @@ const StyledInvites = styled.div`
             border-radius: 3px;
             color: rgba(186, 235, 161, 92);
             cursor: pointer;
-            margin: 5px 5px 5px 5px;
+            margin: 5px 0px 5px 0px;
         }
 `
 
@@ -81,6 +82,7 @@ function UserHome() {
     const currentUser = useSelector(state => state.currentUser)
     const [alerts, setAlerts] = useState(currentUser.alerts)
     const dispatch = useDispatch()
+    const history = useHistory()
 
     useEffect(() => {
         fetch(`/outing_invites/${currentUser.id}`)
@@ -142,12 +144,17 @@ function UserHome() {
         }
     }
 
+    function handleEdit() {
+        history.push('/edit-user')
+    }
+
     return (
         <>
             <Head>
                 <h1>Your Home Page</h1>
                 <img src={`http://localhost:3000${currentUser.avatar}`} alt='user pic'/>
                 <p>{currentUser.username}</p>
+                <button onClick={() => handleEdit()}>Edit Info</button>
             </Head>
             <GridParent>
                 <StyledAlerts>

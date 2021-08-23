@@ -18,7 +18,7 @@ function TrackedBugs() {
 
     return (
         <TrackedBugContainer>
-            <h1>All of the Bugs in our System:</h1>
+            <h2>All of the Bugs in our System:</h2>
             <TrackedBugList>
                 {animals.map(bug => <BugCard key={bug.id} bug={bug}/>)}
             </TrackedBugList>

@@ -18,8 +18,8 @@ function BugCard({bug}) {
     function showDetails() {
         return (
             <>
-                <em>{bug.scientific_name}</em>
-                <p>{bug.description}</p>
+                    <em>{bug.scientific_name}</em>
+                    <p>{bug.description}</p>
             </>
         )
     }

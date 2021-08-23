@@ -12,6 +12,7 @@ import SightingStats from './SightingStats'
 import TrackedBugs from './TrackedBugs'
 import Outing from './Outing'
 import Footer from './Footer';
+import EditUserForm from './EditUserForm'
 import styled, { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
@@ -81,6 +82,9 @@ function App() {
         </Route>
         <Route exact path='/tracked-bugs'>
           <TrackedBugs />
+        </Route>
+        <Route exact path='/edit-user'>
+          <EditUserForm />
         </Route>
         <Redirect from={`/x-user-page/:id`} to={`/user-page/:id`} />
         <Route exact path='/user-page/:id'>

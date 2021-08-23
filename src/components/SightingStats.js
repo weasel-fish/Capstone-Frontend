@@ -33,17 +33,14 @@ function SightingStats() {
         })
     }, [])
 
-    console.log(topWish)
-    console.log(topSight)
-
     return (
         <GridParent>
             <LeftColumn>
-                <h3>Most Wished for Bugs:</h3>
+                <h2>Most Wished for Bugs:</h2>
                 {loading ? <p>Loading...</p> : topWish.map(bug => <TopBugCard key={bug.animal.id} bug={bug.animal} val={bug.val} type={'wishes'}/>)}
             </LeftColumn>
             <RightColumn>
-                <h3>Most Sighted Bugs:</h3>
+                <h2>Most Sighted Bugs:</h2>
                 {loading ? <p>Loading...</p>: topSight.map(bug => <TopBugCard key={bug.animal.id} bug={bug.animal} val={bug.val} type={bug.val > 1 ? 'sightings' : 'sighting'}/>)}
             </RightColumn>
         </GridParent>

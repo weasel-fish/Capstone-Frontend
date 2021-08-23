@@ -62,6 +62,7 @@ const LogOut = styled.button`
     margin-left: auto;
     margin-right: 30px;
     border: none;
+    cursor: pointer;
 
     &:hover {
         background-color: #A42BF5;

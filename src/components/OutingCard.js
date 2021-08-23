@@ -5,6 +5,7 @@ import styled from 'styled-components'
 const StyledCard = styled.div`
     background-color: white;
     border: 2px solid black;
+    border-radius: 8px;
     cursor: pointer;
     text-align: center;
     width: 200px;
