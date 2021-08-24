@@ -28,6 +28,10 @@ const StyledAlerts = styled.div`
             color: rgba(186, 235, 161, 92);
             cursor: pointer;
             margin: 5px 0px 5px 0px;
+            &:hover {
+        background-color: #A42BF5;
+        color: white;
+        }
         }
 `
 const StyledInvites = styled.div`
@@ -44,6 +48,10 @@ const StyledInvites = styled.div`
             color: rgba(186, 235, 161, 92);
             cursor: pointer;
             margin: 5px 0px 5px 0px;
+            &:hover {
+        background-color: #A42BF5;
+        color: white;
+        }
         }
 `
 
@@ -57,6 +65,10 @@ const Button = styled.button`
     color: rgba(186, 235, 161, 92);
     cursor: pointer;
     margin: 5px 0px 5px 0px;
+    &:hover {
+        background-color: #A42BF5;
+        color: white;
+        }
 `
 
 const GridParent = styled.div`
@@ -86,7 +98,7 @@ const NoNews = styled.p`
     margin: 5px;
 `
 const Img = styled.img`
-    border: 10px solid black;
+    border: 8px solid #8C69B8;
     border-radius: 100%;
 `
 

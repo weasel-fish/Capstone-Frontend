@@ -1,5 +1,22 @@
 import {useState} from 'react'
+import styled from 'styled-components'
 
+const Button = styled.button`
+    align-self: center;
+    padding: 6px;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #8C69B8;
+    border: none;
+    border-radius: 3px;
+    color: rgba(186, 235, 161, 92);
+    cursor: pointer;
+    margin: 5px 5px 50px 5px;
+    &:hover {
+        background-color: #A42BF5;
+        color: white;
+    }
+`
 
 function EditSightingForm({sighting, sightings, setSightings, setEdit}) {
     const [formData, setFormData] = useState({environment: sighting.environment, weather_conditions: sighting.weather_conditions, notes: sighting.notes})
@@ -56,10 +73,10 @@ function EditSightingForm({sighting, sightings, setSightings, setEdit}) {
                 <input type='text' name='weather_conditions' onChange={handleChange} value={formData.weather_conditions}></input>
                 <label>Notes:</label>
                 <input type='text' name='notes' onChange={handleChange} value={formData.notes}></input>
-                <input type='submit' />
+                <Button as='input' type='submit' />
             </form>
-            <button onClick={() => setEdit(false)}>Cancel</button>
-            <button onClick={() => handleDelete()}>Delete</button>
+            <Button onClick={() => setEdit(false)}>Cancel</Button>
+            <Button onClick={() => handleDelete()}>Delete</Button>
         </>
     )
 }

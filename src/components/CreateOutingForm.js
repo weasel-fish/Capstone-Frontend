@@ -38,6 +38,10 @@ const StyledForm = styled.form`
         color: rgba(186, 235, 161, 92);
         cursor: pointer;
         margin: 5px 0px 5px 0px;
+        &:hover {
+        background-color: #A42BF5;
+        color: white;
+    }
     }
 `
 const Button = styled.button`
@@ -51,9 +55,14 @@ const Button = styled.button`
     color: rgba(186, 235, 161, 92);
     cursor: pointer;
     margin: 5px 0px 50px 0px;
+
+    &:hover {
+        background-color: #A42BF5;
+        color: white;
+    }
 `
 
-function CreateOutingForm({setDisplayForm}) {
+function CreateOutingForm() {
     const [formData, setFormData] = useState({name:'', location: '', description: '', notes: ''})
     const [errors, setErrors] = useState([])
     const dispatch = useDispatch()
@@ -104,7 +113,8 @@ function CreateOutingForm({setDisplayForm}) {
             if(resp.ok){
                 resp.json().then(outing => {
                     dispatch({type: 'currentUser/addOuting', payload: outing})
-                    setDisplayForm(false)
+                    // setDisplayForm(false)
+                    history.push('/user-home')
                 })
             } else {
                 resp.json().then(data => setErrors(data.errors))

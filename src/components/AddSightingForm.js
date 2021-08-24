@@ -161,6 +161,10 @@ function AddSightingForm({outingID, sightings, setSightings, setSightingForm}) {
         }
     }
 
+    const animalList = animals.sort((a, b) => a.common_name.localeCompare(b.common_name))
+
+    console.log(animalList)
+
     function handleUpload(file, sighting) {
         const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
         upload.create((error, blob) => {
@@ -216,7 +220,7 @@ function AddSightingForm({outingID, sightings, setSightings, setSightingForm}) {
                 <label>Pick a tracked animal or generate new information</label>
                 <select onChange={handleDropChange} name='animal'>
                     <option value='generate'>Generate new</option>
-                    {animals.map(anim => <option key={anim.id} value={anim.id}>{anim.common_name}</option>)}
+                    {animalList.map(anim => <option key={anim.id} value={anim.id}>{anim.common_name}</option>)}
                 </select>
                 {dropdown === 'generate' ? <NewAnimalForm animForm={animForm} handleAnimChange={handleAnimChange}/> : null}
                 <label>Upload an image:</label>

@@ -7,10 +7,17 @@ const BugFansContainer = styled.div`
     flex-direction: column;
     text-align: center;
     margin: 20px auto 20px auto;
+
 `
 const BugFanList = styled.div`
-    text-align: center;
+    /* text-align: center; */
+    display: flex;
     margin: auto;
+    flex-wrap: wrap;
+    width: 70%;
+    justify-content: space-evenly;
+    /* align-items: center; */
+    height: 75%;
 `
 
 function BugFans() {

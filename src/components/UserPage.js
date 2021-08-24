@@ -40,6 +40,15 @@ const Button = styled.button`
     border-radius: 3px;
     color: rgba(186, 235, 161, 92);
     cursor: pointer;
+    &:hover {
+        background-color: #A42BF5;
+        color: white;
+        }
+`
+
+const Img = styled.img`
+    border: 8px solid #8C69B8;
+    border-radius: 100%;
 `
 
 function UserPage() {
@@ -112,7 +121,7 @@ function UserPage() {
             <>
                 <Head>
                     <h1>{user.username}'s Page</h1>
-                    <img src={`http://localhost:3000${user.avatar}`} alt='user pic'/>
+                    <Img src={`http://localhost:3000${user.avatar}`} alt='user pic'/>
                     <br></br>
                     {self ? null : following ? <Button onClick={() => handleUnfollow()}>Unfollow</Button>:<Button onClick={() => handleFollow()}>Follow</Button>}
                 </Head>

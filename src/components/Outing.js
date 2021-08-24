@@ -49,7 +49,11 @@ const Button = styled.button`
     border-radius: 3px;
     color: rgba(186, 235, 161, 92);
     cursor: pointer;
-    margin: 5px 0px 5px 0px;
+    margin: 5px 0px 5px 5px;
+    &:hover {
+        background-color: #A42BF5;
+        color: white;
+        }
 `
 
 const StyledSightings = styled.div`
@@ -68,7 +72,11 @@ const StyledSightings = styled.div`
 const StyledAttendees = styled.div`
     grid-area: 3 / 1 / 6 / 3;
     margin: 60px auto 0px auto;
-    /* padding: px; */
+    border: 3px solid black;
+    border-radius: 8px;
+    background-color: white;
+    height: max-content;
+    padding: 8px;
 `   
 const StyledInviteOthers = styled.div`
 `
@@ -154,7 +162,7 @@ function Outing() {
     function generateOutingInfo() {
         const inviteOthers = (
             <StyledInviteOthers>
-                <label>Invite others:</label>
+                <label>Invite others:
                 <form onSubmit={invite}>
                     <select onChange={() => setMessage('')} name='invitee' defaultValue='default'>
                         <option disabled value='default'>---</option>
@@ -166,6 +174,7 @@ function Outing() {
                     </select>
                     <Button as='input' type='submit' value='Send Invite'/>
                 </form>
+                </label>
                 {message ? <p>{message}</p> : null}
             </StyledInviteOthers>
         )

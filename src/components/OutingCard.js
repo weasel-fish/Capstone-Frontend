@@ -14,13 +14,17 @@ const StyledCard = styled.div`
 `
 const Button = styled.button`
     padding: 6px;
-        font-size: 18px;
-        font-weight: 500;
-        background-color: #8C69B8;
-        border: none;
-        border-radius: 3px;
-        color: rgba(186, 235, 161, 92);
-        cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #8C69B8;
+    border: none;
+    border-radius: 3px;
+    color: rgba(186, 235, 161, 92);
+    cursor: pointer;
+    &:hover {
+        background-color: #A42BF5;
+        color: white;
+        }
 `
 
 function OutingCard({outing}) {

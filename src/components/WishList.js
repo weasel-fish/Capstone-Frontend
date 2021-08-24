@@ -27,6 +27,10 @@ const FormButton = styled.button`
         color: rgba(186, 235, 161, 92);
         margin-top: 20px;
         cursor: pointer;
+        &:hover {
+        background-color: #A42BF5;
+        color: white;
+        }
 `
 
 const NoWishes = styled.p`

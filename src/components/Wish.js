@@ -12,6 +12,10 @@ const StyledRemove = styled.button`
     color: rgba(186, 235, 161, 92);
     margin: 5px 0px 5px 0px;
     cursor: pointer;
+    &:hover {
+        background-color: #A42BF5;
+        color: white;
+        }
 `
 
 function Wish({wish, home}) {

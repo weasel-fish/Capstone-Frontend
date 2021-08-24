@@ -12,6 +12,28 @@ const StyledCard = styled.div`
     margin: 5px;
 `
 
+const Image = styled.img`
+    border: 2px solid black;
+    border-radius: 100%;
+`
+
+const Button = styled.button`
+    align-self: center;
+    padding: 6px;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #8C69B8;
+    border: none;
+    border-radius: 3px;
+    color: rgba(186, 235, 161, 92);
+    cursor: pointer;
+    margin: 5px 0px 50px 0px;
+    &:hover {
+        background-color: #A42BF5;
+        color: white;
+        }
+`
+
 const Name = styled.h5`
     cursor: pointer;
 `
@@ -27,9 +49,9 @@ function SightingCard({sighting, sightings, setSightings, attending}) {
                 {edit ? <EditSightingForm sighting={sighting} sightings={sightings} setSightings={setSightings} setEdit={setEdit}/>
                 :
                 <>  
-                    <img src={`http://localhost:3000${sighting.image}`} alt='bug pic'/>
+                    <Image src={`http://localhost:3000${sighting.image}`} alt='bug pic'/>
                     <br></br>
-                    <button onClick={() => setExpandFurther(!expandFurther)}> {expandFurther ? 'Hide Details' : 'Show Details'} </button>
+                    <Button onClick={() => setExpandFurther(!expandFurther)}> {expandFurther ? 'Hide Details' : 'Show Details'} </Button>
                     {expandFurther ? <>
                         <p><em>{sighting.animal.scientific_name}</em></p>
                         <p>{sighting.animal.description}</p>
@@ -37,7 +59,7 @@ function SightingCard({sighting, sightings, setSightings, attending}) {
                     <p>Environment: {sighting.environment}</p>
                     <p>Weather Conditions: {sighting.weather_conditions}</p>
                     <p>Notes: {sighting.notes}</p>
-                    {attending ? <button onClick={() => setEdit(!edit)}>Edit Sighting</button> : null}
+                    {attending ? <Button onClick={() => setEdit(!edit)}>Edit Sighting</Button> : null}
                 </>}
             </>
         )

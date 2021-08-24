@@ -19,6 +19,10 @@ const StyledForm = styled.form`
         border-radius: 3px;
         color: rgba(186, 235, 161, 92);
         cursor: pointer;
+        &:hover {
+        background-color: #A42BF5;
+        color: white;
+    }
     }
 `
 

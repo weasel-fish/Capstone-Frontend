@@ -26,6 +26,10 @@ const FormButton = styled.button`
     color: rgba(186, 235, 161, 92);
     cursor: pointer;
     margin-top: 20px;
+    &:hover {
+        background-color: #A42BF5;
+        color: white;
+        }
 `
 const NoOuting = styled.p`
     background-color: white;
