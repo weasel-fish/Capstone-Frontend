@@ -16,7 +16,7 @@ const Name = styled.h5`
     cursor: pointer;
 `
 
-function SightingCard({sighting, sightings, setSightings}) {
+function SightingCard({sighting, sightings, setSightings, attending}) {
     const [expand, setExpand] = useState(false)
     const [expandFurther, setExpandFurther] = useState(false)
     const [edit, setEdit] = useState(false)
@@ -37,7 +37,7 @@ function SightingCard({sighting, sightings, setSightings}) {
                     <p>Environment: {sighting.environment}</p>
                     <p>Weather Conditions: {sighting.weather_conditions}</p>
                     <p>Notes: {sighting.notes}</p>
-                    <button onClick={() => setEdit(!edit)}>Edit Sighting</button>
+                    {attending ? <button onClick={() => setEdit(!edit)}>Edit Sighting</button> : null}
                 </>}
             </>
         )

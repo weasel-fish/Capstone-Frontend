@@ -185,7 +185,7 @@ function Outing() {
                         <p>Description: {outing.description}</p>
                         <p> Notes: {outing.notes}</p>
                     </>}
-                    <Button onClick={() => setEdit(!edit)}>{edit ? 'Nevermind' : 'Edit Outing Info'}</Button>
+                    {attending ? <Button onClick={() => setEdit(!edit)}>{edit ? 'Nevermind' : 'Edit Outing Info'}</Button> : null}
                 </StyledInfo>
                 <StyledAttendees>
                     <h3>Attendees:</h3>
@@ -194,10 +194,10 @@ function Outing() {
                     {attending ? attendees.length === 1 ? <Button onClick={() => deleteOuting()}>Delete Outing</Button>: <Button onClick={() => leave()}>Leave Outing</Button> : null}
                 </StyledAttendees>
                 <StyledSightings>
-                    <h3>Sightings!</h3>
+                    <h3>Sightings:</h3>
                     {attending ? <Button onClick={() => setSightingForm(!sightingForm)}>{sightingForm? 'Nevermind' : 'Add Sighting'}</Button> : null}
                     {sightingForm ? <AddSightingForm outingID={outing.id} sightings={sightings} setSightings={setSightings} setSightingForm={setSightingForm}/> : null}
-                    {sightings.map(sight => <SightingCard key={sight.id} sighting={sight} sightings={sightings} setSightings={setSightings}/>)}
+                    {sightings.map(sight => <SightingCard attending={attending} key={sight.id} sighting={sight} sightings={sightings} setSightings={setSightings}/>)}
                 </StyledSightings>
             </GridContainer>
         )

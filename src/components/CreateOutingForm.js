@@ -58,7 +58,8 @@ function CreateOutingForm({setDisplayForm}) {
     const [errors, setErrors] = useState([])
     const dispatch = useDispatch()
     const history = useHistory()
-    
+
+
     function handleChange(e) {
 
         if(e.target.name === 'image') {
@@ -79,7 +80,7 @@ function CreateOutingForm({setDisplayForm}) {
         //     [e.target.name]: e.target.value
         // })
     }
-
+   
     async function handleSubmit(e) {
         e.preventDefault()
 
