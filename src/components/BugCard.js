@@ -10,7 +10,7 @@ const StyledCard = styled.div`
     width: 200px;
     padding: 3px;
     margin: 5px 0px 5px 0px;
-    height: 60px;
+    /* height: 60px; */
 `
 
 function BugCard({bug}) {

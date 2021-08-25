@@ -15,8 +15,8 @@ const Logo = styled(NavLink)`
     margin: 40px;
     margin-right: 50px;
     text-decoration: none;
-    font-size: 35px;
-    font-weight: 600;
+    font-size: 38px;
+    font-weight: 700;
 `
 
 const NavButton = styled(NavLink)`

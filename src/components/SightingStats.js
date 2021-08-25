@@ -37,10 +37,12 @@ function SightingStats() {
         <GridParent>
             <LeftColumn>
                 <h2>Most Wished for Bugs:</h2>
+                <br></br>
                 {loading ? <p>Loading...</p> : topWish.map(bug => <TopBugCard key={bug.animal.id} bug={bug.animal} val={bug.val} type={'wishes'}/>)}
             </LeftColumn>
             <RightColumn>
                 <h2>Most Sighted Bugs:</h2>
+                <br></br>
                 {loading ? <p>Loading...</p>: topSight.map(bug => <TopBugCard key={bug.animal.id} bug={bug.animal} val={bug.val} type={bug.val > 1 ? 'sightings' : 'sighting'}/>)}
             </RightColumn>
         </GridParent>

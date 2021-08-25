@@ -15,16 +15,18 @@ const Img = styled.img`
 
 const GridContainer = styled.div`
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+    margin-bottom: 60px;
 `
 
 const StyledPic = styled.div`
-    grid-area: 1 / 1 / 3 / 3;
+    grid-area: 1 / 1 / 2 / 2;
     margin: 50px auto 0px auto;
     text-align: center;
+    max-height: fit-content;
 
     & h1 {
         padding-bottom: 20px;
@@ -32,12 +34,15 @@ const StyledPic = styled.div`
 `
 
 const StyledInfo = styled.div`
-    grid-area: 1 / 3 / 3 / 6;
-    margin: auto 100px 10px 20px;
+    grid-area: 1 / 2 / 2 / 3;
+    margin: auto auto 20px 50px;
+    /* margin: auto; */
     border: 3px solid black;
     border-radius: 8px;
     background-color: white;
     padding: 30px;
+    max-height: fit-content;
+    width: fit-content;
 `
 
 const Button = styled.button`
@@ -57,7 +62,7 @@ const Button = styled.button`
 `
 
 const StyledSightings = styled.div`
-    grid-area: 3 / 3 / 6 / 5;
+    grid-area: 1 / 2 / 2 / 3;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -70,7 +75,7 @@ const StyledSightings = styled.div`
 `
 
 const StyledAttendees = styled.div`
-    grid-area: 3 / 1 / 6 / 3;
+    grid-area: 1 / 1 / 2 / 2;
     margin: 60px auto 0px auto;
     border: 3px solid black;
     border-radius: 8px;
@@ -180,6 +185,7 @@ function Outing() {
         )
 
         return (
+            <>
             <GridContainer>
                 <StyledPic>
                     <h1>{outing.name}</h1>
@@ -196,6 +202,8 @@ function Outing() {
                     </>}
                     {attending ? <Button onClick={() => setEdit(!edit)}>{edit ? 'Nevermind' : 'Edit Outing Info'}</Button> : null}
                 </StyledInfo>
+            </GridContainer>
+            <GridContainer>
                 <StyledAttendees>
                     <h3>Attendees:</h3>
                     {attendees.map(user => <UserCard key={user.id} user={user}/>)}
@@ -209,6 +217,7 @@ function Outing() {
                     {sightings.map(sight => <SightingCard attending={attending} key={sight.id} sighting={sight} sightings={sightings} setSightings={setSightings}/>)}
                 </StyledSightings>
             </GridContainer>
+            </>
         )
     }
 
