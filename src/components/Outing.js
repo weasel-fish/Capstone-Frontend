@@ -117,7 +117,7 @@ function Outing() {
                 setAttending(true)
             }
         })
-    }, [])
+    }, [currentUser.id])
 
     async function invite(e) {
         e.preventDefault()
@@ -174,6 +174,8 @@ function Outing() {
                         {users.map(user => {
                             if(!attendees.some(attendee => attendee.id === user.id) && !openInvites.some(invite => invite.invitee_id === user.id)) {
                                 return <option key={user.id} value={user.id}>{user.username}</option>
+                            } else {
+                                return null
                             }
                         })}
                     </select>

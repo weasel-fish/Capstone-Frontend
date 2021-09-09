@@ -76,7 +76,7 @@ function UserPage() {
                 setLoading(false)
             })
         // }
-    }, []) //Should handle User Not Found
+    }, [params.id]) //Should handle User Not Found
 
     async function handleFollow() {
         

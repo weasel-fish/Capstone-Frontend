@@ -67,7 +67,7 @@ function EditUserForm() {
 
     const currentUser = useSelector(state => state.currentUser)
     const [email, setEmail] = useState(currentUser.address)
-    const [errors, setErrors] = useState([])
+    // const [errors, setErrors] = useState([])
     const [newAvatar, setNewAvatar] = useState({})
     const history = useHistory()
     const dispatch = useDispatch()
@@ -98,7 +98,7 @@ function EditUserForm() {
         const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
         upload.create((error, blob) => {
             if(error) {
-                setErrors([error])
+                // setErrors([error])
             } else {
                 fetch(`/users/${user.id}`, {
                     method: 'PUT',

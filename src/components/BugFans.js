@@ -31,6 +31,8 @@ function BugFans() {
                 {users.map(user => {
                     if(user.username !== currentUser.username) {
                         return <UserCard key={user.id} user={user} />
+                    } else {
+                        return null
                     }
                 })}
             </BugFanList>

@@ -13,7 +13,7 @@ import TrackedBugs from './TrackedBugs'
 import Outing from './Outing'
 import Footer from './Footer';
 import EditUserForm from './EditUserForm'
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import CreateOutingForm from './CreateOutingForm';
 
 const GlobalStyle = createGlobalStyle`

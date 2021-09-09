@@ -115,7 +115,7 @@ function UserHome() {
         fetch(`/outing_invites/${currentUser.id}`)
         .then(resp => resp.json())
         .then(invites => setInvites(invites))
-    }, [])
+    }, [currentUser.id])
 
 
     function renderInvites() {
