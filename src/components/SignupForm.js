@@ -116,7 +116,7 @@ function SignupForm() {
     }
 
     function handleUpload(file, user) {
-        const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
+        const upload = new DirectUpload(file, '/rails/active_storage/direct_uploads')
         upload.create((error, blob) => {
             if(error) {
                 setErrors([error])
