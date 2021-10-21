@@ -108,6 +108,7 @@ function Outing() {
         fetch(`/outings/${params.id}`)
         .then(resp => resp.json())
         .then(outing => {
+            document.title = `BugNet - ${outing.name}`
             setOuting(outing)
             setAttendees(outing.users)
             setOpenInvites(outing.outing_invites)

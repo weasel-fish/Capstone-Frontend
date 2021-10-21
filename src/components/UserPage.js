@@ -64,20 +64,19 @@ function UserPage() {
 
     
     useEffect(() => {
-        
         // if(params.id == currentUser.id) {
         //     history.push('/user-home')
         // } else {
             fetch(`/users/${params.id}`)
             .then(resp => resp.json())
             .then(user => {
+                document.title = `BugNet - ${user.username}'s Page`
                 setUser(user)
                 setFollowers(user.followers)
                 setLoading(false)
             })
         // }
     }, []) //Should handle User Not Found
-
     async function handleFollow() {
         
         let resp = await fetch('/follows', {
