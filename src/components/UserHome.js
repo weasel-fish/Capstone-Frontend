@@ -112,6 +112,7 @@ function UserHome() {
     const history = useHistory()
 
     useEffect(() => {
+        document.title = "BugNet - Home"
         fetch(`/outing_invites/${currentUser.id}`)
         .then(resp => resp.json())
         .then(invites => setInvites(invites))

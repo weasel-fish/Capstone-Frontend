@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import LoginForm from "./LoginForm"
 import SignupForm from "./SignupForm"
 import styled from 'styled-components'
@@ -27,6 +27,10 @@ const StyledButton = styled.button`
 function LoginSignupPage() {
     const [signUp, setSignUp] = useState(false)
     
+    useEffect(() => {
+        document.title = "BugNet - Login"
+    }, [])
+
     return (
         <>
         {signUp ? <SignupForm /> : <LoginForm />}

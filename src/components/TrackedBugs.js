@@ -1,4 +1,5 @@
 import {useSelector} from 'react-redux'
+import { useEffect } from 'react'
 import BugCard from './BugCard'
 import styled from 'styled-components'
 
@@ -22,6 +23,10 @@ const TrackedBugList = styled.div`
 function TrackedBugs() {
     const animals = useSelector(state => state.animals)
     const animalList = animals.sort((a, b) => a.common_name.localeCompare(b.common_name))
+
+    useEffect(() => {
+        document.title = "BugNet - Tracked Bugs"
+    }, [])
 
     return (
         <TrackedBugContainer>

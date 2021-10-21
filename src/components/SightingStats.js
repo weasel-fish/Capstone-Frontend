@@ -24,6 +24,7 @@ function SightingStats() {
     const [topWish, setTopWish] = useState([])
 
     useEffect(() => {
+        document.title = "BugNet - Sighting Stats"
         fetch('/stats')
         .then(resp => resp.json())
         .then(data => {

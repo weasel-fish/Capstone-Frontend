@@ -1,4 +1,5 @@
 import {useSelector} from 'react-redux'
+import {useEffect} from 'react'
 import UserCard from "./UserCard"
 import styled from 'styled-components'
 
@@ -23,6 +24,10 @@ const BugFanList = styled.div`
 function BugFans() {
     const users = useSelector(state => state.users)
     const currentUser = useSelector(state => state.currentUser)
+
+    useEffect(() => {
+        document.title = "BugNet - Bug Fans"
+    })
 
     return (
         <BugFansContainer>

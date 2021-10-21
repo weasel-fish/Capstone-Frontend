@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import styled from "styled-components"
 
 const Container = styled.div`
@@ -17,6 +18,11 @@ const Logo = styled.h1`
 `
 
 function SplashPage() {
+
+    useEffect(() => {
+        document.title = "BugNet"
+    }, [])
+    
     return (
         <Container>
             <Logo>BugNet</Logo>
